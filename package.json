@@ -1,0 +1,19 @@
+{
+  "name": "gateqr-platform",
+  "scripts": {
+    "dev": "bun run --hot backend/src/index.ts",
+    "start": "bun run backend/src/index.ts"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.2.2",
+    "csv-simple-parser": "^1.0.3",
+    "hono": "^4.4.7",
+    "jszip": "^3.10.1",
+    "qrcode": "^1.5.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.5",
+    "@types/qrcode": "^1.5.5"
+  }
+}
