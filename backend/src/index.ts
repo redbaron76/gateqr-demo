@@ -9,6 +9,10 @@ app.use("*", logger());
 
 app.route("/api/upload", uploadRoute);
 
+app.get("/test", (c) => {
+  return c.json({ message: "Hello, World!" });
+});
+
 app.get("*", serveStatic({ root: "./frontend/dist" }));
 app.get("*", serveStatic({ path: "./frontend/dist/index.html" }));
 
