@@ -13,7 +13,20 @@ export const generateZipFile = async (file: File) => {
   for (const row of csv) {
     const code = rowToBase64(row);
     const qrcode = await generateVectorQRCode(code, "svg");
-    zip.file(`code-${i}.svg`, qrcode);
+
+    // get keys from row
+    const values = Object.values(row);
+
+    // map keys to lowercase
+    const val = values.map((value) => value.toLowerCase());
+
+    const first = val[0].replace(/ /g, "_");
+    const last = val[1].replace(/ /g, "_");
+
+    // add file to zip
+    zip.file(`${last}_${first}_${i}.svg`, qrcode);
+
+    // increment i
     i++;
   }
 

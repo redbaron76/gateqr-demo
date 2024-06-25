@@ -34,7 +34,7 @@ export function useFile() {
       }
 
       response.blob().then((blob) => {
-        saveAs(blob, "qr-codes.zip");
+        saveAs(blob, `${new Date().getTime()}.zip`);
         setLoading(false);
       });
     } catch (error) {

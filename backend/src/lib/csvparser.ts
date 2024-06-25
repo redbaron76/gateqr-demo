@@ -6,6 +6,7 @@ export const parseCSV = async (file: File) => {
 };
 
 export const rowToBase64 = (row: Record<string, string>): string => {
+  row["provider"] = "gateqr";
   return Buffer.from(JSON.stringify(row)).toString("base64");
 };
 

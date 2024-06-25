@@ -2,7 +2,9 @@
   "name": "gateqr-platform",
   "scripts": {
     "dev": "bun run --hot backend/src/index.ts",
-    "start": "bun run backend/src/index.ts"
+    "build": "cd frontend && bun install && bun run build",
+    "start": "bun run backend/src/index.ts",
+    "rsync": "rsync -avz -e ssh . root@162.55.183.36:/opt/gateqr-platform --exclude node_modules --exclude .git --exclude frontend/node_modules"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",

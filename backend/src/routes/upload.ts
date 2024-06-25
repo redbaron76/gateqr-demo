@@ -20,9 +20,6 @@ export const uploadRoute = new Hono()
       const body = c.req.valid("form");
       const file = body["file"];
 
-      c.header("Content-Disposition", "attachment; filename=qr-codes.zip");
-      c.header("Content-Type", "application/zip");
-
       const buffer = await generateZipFile(file);
 
       return c.body(buffer);
