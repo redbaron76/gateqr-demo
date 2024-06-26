@@ -31,7 +31,7 @@ const Guest: React.FC<Props> = ({ bg, guest }) => {
         <div className="flex flex-col items-center gap-2 p-4 mb-10 rounded-2xl bg-white">
           <ExclamationTriangleIcon className="size-12 text-red-500" />
           <div className="font-bold text-xl break-words uppercase text-center text-red-500">
-            Codice già scansionato!
+            Code already scanned!
           </div>
         </div>
       )}

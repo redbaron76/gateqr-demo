@@ -10,10 +10,10 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="flex flex-col flex-grow items-center justify-center gap-20 bg-gradient-to-b from-slate-200 to-white">
+    <div className="flex flex-col flex-grow items-center justify-center gap-5 md:gap-20 bg-gradient-to-b from-slate-200 to-white">
       <div className="flex flex-col items-center gap-6 md:gap-8">
         <h1 className="font-extrabold text-3xl text-neutral-800 text-center w-auto px-6 md:w-3/4 md:text-6xl">
-          The all-in-one solution for your event access list.
+          The all-in-one solution for managing entrance access.
         </h1>
         <h2 className="font-light text-center px-8 md:text-lg">
           You provide the guest list, we deliver{" "}

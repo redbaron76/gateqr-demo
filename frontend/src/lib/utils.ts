@@ -10,6 +10,9 @@ export const saveAs = (blob: Blob, filename: string) => {
   const a = document.createElement("a");
   a.href = url;
   a.download = filename;
+  if (filename.includes(".")) {
+    a.type = `application/${filename.split(".").pop()}`;
+  }
   a.click();
   URL.revokeObjectURL(url);
 };
