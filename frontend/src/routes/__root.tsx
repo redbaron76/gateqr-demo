@@ -4,13 +4,15 @@ export const Route = createRootRoute({
   component: () => (
     <div className="flex flex-col min-h-[100dvh]">
       <div className="flex justify-between py-1">
-        <span className="font-extrabold px-2">GATE:QR</span>
+        <Link to="/">
+          <span className="font-extrabold px-2">GATE:QR</span>
+        </Link>
         <div className="divide-x">
           <Link to="/" className="px-2 [&.active]:font-semibold">
-            Genera codici
+            QR Generator
           </Link>
           <Link to="/scanner" className="px-2 [&.active]:font-semibold">
-            Scanner
+            CODE Scanner
           </Link>
         </div>
       </div>

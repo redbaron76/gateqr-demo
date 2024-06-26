@@ -5,6 +5,7 @@ import { useFile } from "@/hooks/useFile";
 
 const Dropzone = () => {
   const {
+    handleSampleDownload,
     handleCancel,
     handleSubmit,
     getInputProps,
@@ -30,39 +31,51 @@ const Dropzone = () => {
           {hasFileSelected ? (
             <span className="flex flex-col">
               <span>
-                Hai selezionato: <strong>{file?.name}</strong>
+                Selected file: <strong>{file?.name}</strong>
               </span>
               <span className="text-[10px]">[{bytesToSize(file!.size)}]</span>
             </span>
           ) : isDragActive ? (
             <span>
-              Rilascia il file <strong>*.csv</strong> qui...
+              Drop your <strong>*.csv</strong> file here...
             </span>
           ) : (
             <span>
-              Rilascia un file <strong>*.csv</strong> qui
-              <br /> o <strong>clicca</strong> per selezionarne uno
+              Drop a <strong>*.csv</strong> file here
+              <br /> or <strong>click</strong> to select it from disk.
             </span>
           )}
         </p>
       </div>
-      {hasFileSelected && (
+      {hasFileSelected ? (
         <div className="flex flex-col gap-1">
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-neutral-600"
+            className="w-full bg-neutral-600 rounded-xl"
           >
             {loading && (
               <ArrowPathIcon className="size-4 mr-1 text-neutral-300 animate-spin" />
             )}
-            {loading ? "Generazione codici..." : "Carica file"}
+            {loading ? "Generating codes..." : "Upload file"}
           </Button>
           {!loading && (
             <Button variant="link" className="text-xs" onClick={handleCancel}>
-              Annulla
+              Cancel
             </Button>
           )}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center mt-4 gap-2">
+          <h3 className="text-sm font-bold">How to create a *.csv file?</h3>
+          <a
+            href="#"
+            title="Get a *.csv sample file"
+            className="text-xs text-neutral-500"
+            onClick={(e) => handleSampleDownload(e)}
+          >
+            Get a sample here
+          </a>
         </div>
       )}
     </form>

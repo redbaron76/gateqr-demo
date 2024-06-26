@@ -40,7 +40,7 @@ function Scanner() {
         <img src={QrFrame} alt="qr-frame" className="w-56 h-56" />
       </div>
 
-      <div className="text-xs font-thin text-white">Inizializzo scanner...</div>
+      <div className="text-xs font-thin text-white">Starting scanner...</div>
 
       <Invalid bg={bg} />
       <Guest guest={currentGuest} bg={bg} />
@@ -59,7 +59,7 @@ function Scanner() {
           onClick={resetCounter}
           className="absolute bottom-5 left-5 text-white"
         >
-          Reset
+          Reset list
         </Button>
       )}
     </div>

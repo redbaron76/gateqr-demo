@@ -4,8 +4,11 @@ import { uploadSchema } from "../validators/upload";
 import { zValidator } from "@hono/zod-validator";
 
 export const uploadRoute = new Hono()
-  .get("/", (c) => {
-    return c.json({ message: "GET: /upload" });
+  .get("/", async (c) => {
+    const file = Bun.file("./backend/assets/sample.csv");
+    const buffer = await file.arrayBuffer();
+
+    return c.body(buffer);
   })
   .post(
     "/",

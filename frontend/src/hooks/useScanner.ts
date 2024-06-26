@@ -41,7 +41,7 @@ export default function useScanner() {
   };
 
   const resetCounter = () => {
-    if (confirm("Resettare il counter?")) {
+    if (confirm("Reset counter?")) {
       setGuest("guests", []);
     }
   };

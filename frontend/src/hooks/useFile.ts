@@ -62,6 +62,29 @@ export function useFile() {
     }
   };
 
+  const handleSampleDownload = async (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/upload", {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        alert(data.message);
+      }
+
+      response.blob().then((blob) => {
+        saveAs(blob, "sample.csv");
+      });
+    } catch (error) {
+      console.error("Error downloading sample file:", error);
+      alert("Error downloading sample file!");
+    }
+  };
+
   // function convert bytes to human readable format
   const bytesToSize = (bytes: number) => {
     const sizes = ["Bytes", "Kb", "Mb", "Gb", "Tb"];
@@ -75,6 +98,7 @@ export function useFile() {
     loading,
     hasFileSelected: !!file,
     isDragActive,
+    handleSampleDownload,
     getRootProps,
     getInputProps,
     handleFileChange,
