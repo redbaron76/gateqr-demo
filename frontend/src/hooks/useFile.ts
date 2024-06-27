@@ -1,5 +1,5 @@
 import React from "react";
-import { saveAs } from "@/lib/utils";
+import { saveAs } from "file-saver";
 import { useDropzone } from "react-dropzone";
 
 export function useFile() {

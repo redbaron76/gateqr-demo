@@ -1,8 +1,8 @@
-import {
-  CheckBadgeIcon,
-  ExclamationTriangleIcon,
-} from "@heroicons/react/24/outline";
 import { Guest as CurrentGuest, ScanBackground } from "@/stores/useGuestStore";
+import {
+  ExclamationTriangleIcon,
+  ShieldCheckIcon,
+} from "@heroicons/react/24/outline";
 
 import React from "react";
 
@@ -23,7 +23,7 @@ const Guest: React.FC<Props> = ({ bg, guest }) => {
     >
       {bg === "bg-green-500" && (
         <div className="flex justify-center">
-          <CheckBadgeIcon className="size-32 text-amber-400" />
+          <ShieldCheckIcon className="size-32 text-amber-400" />
         </div>
       )}
 
@@ -31,7 +31,7 @@ const Guest: React.FC<Props> = ({ bg, guest }) => {
         <div className="flex flex-col items-center gap-2 p-4 mb-10 rounded-2xl bg-white">
           <ExclamationTriangleIcon className="size-12 text-red-500" />
           <div className="font-bold text-xl break-words uppercase text-center text-red-500">
-            Code already scanned!
+            Code already checked!
           </div>
         </div>
       )}

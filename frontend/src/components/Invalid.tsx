@@ -16,7 +16,7 @@ const Invalid: React.FC<Props> = ({ bg }) => {
       <div className="flex flex-col items-center gap-4">
         <ExclamationTriangleIcon className="size-12 text-amber-400" />
         <div className="font-bold text-2xl text-white break-words uppercase">
-          Codice non valido!
+          QR Code not allowed!
         </div>
       </div>
     </div>

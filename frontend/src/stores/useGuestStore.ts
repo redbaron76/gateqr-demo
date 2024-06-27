@@ -1,5 +1,6 @@
 import { createJSONStorage, persist } from "zustand/middleware";
 
+import ScannerQR from "@/lib/scannerqr";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -20,13 +21,15 @@ export type GuestProps = {
   currentGuest: Guest;
   timeOut?: Timer;
   isPausing: boolean;
+  scanner?: ScannerQR;
+  sound: boolean;
 };
 
 interface GuestStore extends GuestProps {
-  checkQrData: (data: string, cb: () => Promise<void>, timeOut: number) => void;
+  checkQrData: (data: string, timeOut: number) => void;
   decodeBase64: (base64: string) => Guest;
-  resumeScanner: (cb: () => Promise<void>, timeOut: number) => void;
-  toggleScanner: (cb: () => Promise<void>, timeOut: number) => void;
+  resumeScanner: (timeOut: number) => void;
+  toggleScanner: () => void;
   resetScannerState: () => void;
   setGuest: (key: keyof GuestProps, value: GuestProps[typeof key]) => void;
 }
@@ -40,11 +43,12 @@ export const useGuestStore = create<GuestStore>()(
         provider: "gateqr",
       },
       isPausing: false,
+      sound: false,
 
-      checkQrData: (data, cb, to = 2000) => {
+      checkQrData: (data, to = 2000) => {
         let runFinally: boolean = true;
 
-        const { bg, guests, decodeBase64, resumeScanner } = get();
+        const { bg, guests, scanner, decodeBase64, resumeScanner } = get();
 
         try {
           // prevent fast double execution
@@ -59,6 +63,8 @@ export const useGuestStore = create<GuestStore>()(
               `Invalid QR code: ${JSON.stringify(guest, null, 2)}`
             );
           }
+
+          scanner?.stopScanner();
 
           // check guest object with all the same properties not already in guests list
           const guestPresent = guests.some((g) =>
@@ -77,7 +83,7 @@ export const useGuestStore = create<GuestStore>()(
             state.currentGuest = { provider: "gateqr" };
           });
         } finally {
-          if (runFinally) resumeScanner(cb, to);
+          if (runFinally) resumeScanner(to);
         }
       },
 
@@ -85,18 +91,19 @@ export const useGuestStore = create<GuestStore>()(
         return JSON.parse(atob(base64.toString()));
       },
 
-      resumeScanner: (cb, to) => {
+      resumeScanner: (to) => {
+        const { scanner } = get();
         const timeOut = setTimeout(async () => {
-          await cb();
           set((state) => {
             state.bg = "bg-black";
             state.currentGuest = { provider: "gateqr" };
           });
+          scanner?.runScanner();
         }, to);
         set({ timeOut });
       },
 
-      toggleScanner: (cb, to) => {
+      toggleScanner: () => {
         const { bg, timeOut, resumeScanner } = get();
         if (timeOut && bg !== "bg-black") {
           clearTimeout(timeOut);
@@ -105,7 +112,7 @@ export const useGuestStore = create<GuestStore>()(
 
         if (!timeOut && bg !== "bg-black") {
           set({ bg: "bg-black", isPausing: false });
-          resumeScanner(cb, to);
+          resumeScanner(0);
         }
       },
 
@@ -119,11 +126,7 @@ export const useGuestStore = create<GuestStore>()(
       },
 
       setGuest: (key, value) => {
-        const state = get();
-        set({
-          ...state,
-          [key]: value,
-        });
+        set({ [key]: value });
       },
     })),
     {
@@ -131,6 +134,7 @@ export const useGuestStore = create<GuestStore>()(
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         guests: state.guests,
+        sound: state.sound,
         // currentGuest: state.currentGuest,
       }),
     }

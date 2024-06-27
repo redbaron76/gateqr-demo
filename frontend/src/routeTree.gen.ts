@@ -11,10 +11,16 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ScanneroldImport } from './routes/scannerold'
 import { Route as ScannerImport } from './routes/scanner'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const ScanneroldRoute = ScanneroldImport.update({
+  path: '/scannerold',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ScannerRoute = ScannerImport.update({
   path: '/scanner',
@@ -44,12 +50,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScannerImport
       parentRoute: typeof rootRoute
     }
+    '/scannerold': {
+      id: '/scannerold'
+      path: '/scannerold'
+      fullPath: '/scannerold'
+      preLoaderRoute: typeof ScanneroldImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, ScannerRoute })
+export const routeTree = rootRoute.addChildren({
+  IndexRoute,
+  ScannerRoute,
+  ScanneroldRoute,
+})
 
 /* prettier-ignore-end */
 
@@ -60,7 +77,8 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, ScannerRoute })
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/scanner"
+        "/scanner",
+        "/scannerold"
       ]
     },
     "/": {
@@ -68,6 +86,9 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, ScannerRoute })
     },
     "/scanner": {
       "filePath": "scanner.tsx"
+    },
+    "/scannerold": {
+      "filePath": "scannerold.tsx"
     }
   }
 }

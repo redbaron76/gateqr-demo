@@ -25,7 +25,7 @@ const Dropzone = () => {
       >
         <input {...getInputProps()} />
         <CloudArrowUpIcon
-          className={`size-16 text-neutral-600 ${loading ? "animate-pulse" : ""}`}
+          className={`size-16 ${hasFileSelected ? "text-blue-600" : "text-neutral-600"}  ${loading ? "animate-pulse" : ""}`}
         />
         <p className="text-base text-center text-neutral-600">
           {hasFileSelected ? (
@@ -52,7 +52,7 @@ const Dropzone = () => {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-neutral-600 rounded-xl"
+            className="w-full rounded-xl bg-blue-600"
           >
             {loading && (
               <ArrowPathIcon className="size-4 mr-1 text-neutral-300 animate-spin" />
