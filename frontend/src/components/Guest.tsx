@@ -38,12 +38,22 @@ const Guest: React.FC<Props> = ({ bg, guest }) => {
         </div>
       )}
 
-      {entries.map(([key, value], i) => (
-        <div key={`${key}-${i}`} className="text-white">
-          <span className="">{key}</span>
-          <div className="font-bold text-2xl break-words">{value}</div>
-        </div>
-      ))}
+      {entries.map(([key, value], i) => {
+        let size = "text-2xl";
+        if (key === "_checkTime") {
+          key = "Check Time";
+          size = "text-lg";
+        }
+
+        if (value.length > 20) size = "text-lg";
+
+        return (
+          <div key={`${key}-${i}`} className="text-white">
+            <span className="">{key}</span>
+            <div className={`font-bold break-words ${size}`}>{value}</div>
+          </div>
+        );
+      })}
     </div>
   );
 };

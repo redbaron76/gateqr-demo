@@ -14,6 +14,7 @@ export type ScanBackground =
 export type Guest = {
   _id: string;
   _provider: Provider;
+  _checkTime?: string;
 } & Record<string, string>;
 
 export type GuestProps = {
@@ -73,9 +74,17 @@ export const useGuestStore = create<GuestStore>()(
           scanner?.stopScanner();
 
           // check guest object with all the same properties not already in guests list
-          const guestPresent = guests.some((g) =>
-            Object.keys(g).every((k) => g[k] === guest[k])
+          const guestPresent = guests.find((g) =>
+            // Object.keys(g).every((k) => g[k] === guest[k])
+            Object.keys(g)
+              .filter((k) => k !== "_checkTime")
+              .every((k) => g[k] === guest[k])
           );
+
+          // add new _checkTime to guest object or retrieve first one
+          guest._checkTime = guestPresent
+            ? guestPresent._checkTime
+            : new Date().toLocaleString();
 
           set((state) => {
             state.bg = guestPresent ? "bg-amber-500" : "bg-green-500";
