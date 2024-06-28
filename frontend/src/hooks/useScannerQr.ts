@@ -8,32 +8,29 @@ export default function useScannerQr({ width, height }: RectReadOnly) {
   const videoEl = React.useRef<HTMLVideoElement>(null);
   const audioEl = React.useRef<HTMLAudioElement>(null);
   const canvasEl = React.useRef<HTMLCanvasElement>(null);
-  const qrBoxEl = React.useRef<HTMLDivElement>(null);
 
   const TO = 3000;
 
   const {
     bg,
     sound,
-    guests,
     timeOut,
     isPausing,
     currentGuest,
     checkQrData,
     setGuest,
     resetScannerState,
-    toggleScanner,
+    tapScanner,
   } = useGuestStore((store) => ({
     bg: store.bg,
     sound: store.sound,
-    guests: store.guests,
     timeOut: store.timeOut,
     isPausing: store.isPausing,
     currentGuest: store.currentGuest,
     checkQrData: store.checkQrData,
     setGuest: store.setGuest,
     resetScannerState: store.resetScannerState,
-    toggleScanner: store.toggleScanner,
+    tapScanner: store.tapScanner,
   }));
 
   const resetCounter = () => {
@@ -52,30 +49,30 @@ export default function useScannerQr({ width, height }: RectReadOnly) {
     };
 
     if (width && height) {
-      scanner.current = new ScannerQR(videoEl.current!, onScanSuccess, {
-        scanningInterval: 250,
-        detectTimeout: 500,
-        detectColor: "#ffcc00",
-        detectWidth: 5,
-        detectEnabled: false,
-        vibrate: false,
-        sound: sound,
-        audio: audioEl.current!,
-        canvas: canvasEl.current!,
-        constraints: {
-          audio: false,
-          video: {
-            facingMode: "environment",
-            width,
-            height,
+      scanner.current = new ScannerQR(
+        videoEl.current!,
+        onScanSuccess,
+        setGuest,
+        {
+          scanningInterval: 250,
+          detectTimeout: 500,
+          detectColor: "#ffcc00",
+          detectWidth: 5,
+          detectEnabled: false,
+          vibrate: false,
+          sound: sound,
+          audio: audioEl.current!,
+          canvas: canvasEl.current!,
+          constraints: {
+            audio: false,
+            video: {
+              facingMode: "environment",
+              width,
+              height,
+            },
           },
-        },
-      });
-
-      if (scanner.current) {
-        setGuest("scanner", scanner.current);
-        setGuest("sound", scanner.current.sound);
-      }
+        }
+      );
     }
 
     return () => {
@@ -93,12 +90,10 @@ export default function useScannerQr({ width, height }: RectReadOnly) {
     audioEl,
     videoEl,
     canvasEl,
-    qrBoxEl,
     timeOut,
     currentGuest,
-    counter: guests.length,
     isPausing,
     resetCounter,
-    toggleScanner,
+    tapScanner,
   };
 }

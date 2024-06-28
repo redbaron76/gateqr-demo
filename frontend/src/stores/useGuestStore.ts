@@ -21,6 +21,7 @@ export type GuestProps = {
   currentGuest: Guest;
   timeOut?: Timer;
   isPausing: boolean;
+  isScanning: boolean;
   scanner?: ScannerQR;
   sound: boolean;
 };
@@ -29,7 +30,7 @@ interface GuestStore extends GuestProps {
   checkQrData: (data: string, timeOut: number) => void;
   decodeBase64: (base64: string) => Guest;
   resumeScanner: (timeOut: number) => void;
-  toggleScanner: () => void;
+  tapScanner: () => void;
   resetScannerState: () => void;
   setGuest: (key: keyof GuestProps, value: GuestProps[typeof key]) => void;
 }
@@ -43,6 +44,7 @@ export const useGuestStore = create<GuestStore>()(
         provider: "gateqr",
       },
       isPausing: false,
+      isScanning: false,
       sound: false,
 
       checkQrData: (data, to = 2000) => {
@@ -103,16 +105,24 @@ export const useGuestStore = create<GuestStore>()(
         set({ timeOut });
       },
 
-      toggleScanner: () => {
-        const { bg, timeOut, resumeScanner } = get();
+      tapScanner: () => {
+        const { bg, timeOut, isScanning, scanner, resumeScanner } = get();
+
+        // pause scanner
         if (timeOut && bg !== "bg-black") {
           clearTimeout(timeOut);
           set({ timeOut: undefined, isPausing: true });
         }
 
+        // resume from pause
         if (!timeOut && bg !== "bg-black") {
           set({ bg: "bg-black", isPausing: false });
           resumeScanner(0);
+        }
+
+        // run scanner first time (first tap)
+        if (!isScanning && bg === "bg-black") {
+          scanner?.runScanner();
         }
       },
 
@@ -121,6 +131,7 @@ export const useGuestStore = create<GuestStore>()(
           bg: "bg-black",
           isPausing: false,
           timeOut: undefined,
+          scanner: undefined,
           currentGuest: { provider: "gateqr" },
         });
       },

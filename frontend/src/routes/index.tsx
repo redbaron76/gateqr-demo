@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { CameraIcon } from "@heroicons/react/24/solid";
 import Dropzone from "@/components/Dropzone";
 import { Link } from "@tanstack/react-router";
-import { QrCodeIcon } from "@heroicons/react/24/solid";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
@@ -30,7 +30,7 @@ function Index() {
 
       <Button asChild size="lg" className=" bg-neutral-800 rounded-xl">
         <Link to="/scanner" className="flex items-center gap-1">
-          <QrCodeIcon className="size-5 mr-2" />
+          <CameraIcon className="size-5 mr-2" />
           QR Code Scanner
         </Link>
       </Button>

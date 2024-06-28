@@ -15,12 +15,13 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { useGuestStore } from "@/stores/useGuestStore";
 
 const Reset: React.FC = () => {
-  const { counter, setGuest } = useGuestStore((store) => ({
+  const { bg, counter, setGuest } = useGuestStore((store) => ({
+    bg: store.bg,
     counter: store.guests.length,
     setGuest: store.setGuest,
   }));
 
-  if (counter === 0) return null;
+  if (counter === 0 || bg !== "bg-black") return null;
 
   const resetGuestList = () => setGuest("guests", []);
 

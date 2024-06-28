@@ -30,7 +30,7 @@ export default function useScanner() {
     checkQrData: store.checkQrData,
     setGuest: store.setGuest,
     resetScannerState: store.resetScannerState,
-    toggleScanner: store.toggleScanner,
+    toggleScanner: store.tapScanner,
   }));
 
   const onScanSuccess = (result: QrScanner.ScanResult) => {

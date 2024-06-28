@@ -4,11 +4,14 @@ import React from "react";
 import { useGuestStore } from "@/stores/useGuestStore";
 
 const Sound: React.FC = () => {
-  const { sound, scanner, setGuest } = useGuestStore((store) => ({
+  const { bg, sound, scanner, setGuest } = useGuestStore((store) => ({
+    bg: store.bg,
     sound: store.sound,
     scanner: store.scanner,
     setGuest: store.setGuest,
   }));
+
+  if (bg !== "bg-black") return null;
 
   return (
     <button

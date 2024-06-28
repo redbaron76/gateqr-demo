@@ -1,5 +1,7 @@
 import { BarcodeDetector, Point2D } from "barcode-detector";
 
+import { GuestProps } from "@/stores/useGuestStore";
+
 export type QrScannerOptions = {
   canvas?: HTMLCanvasElement;
   audio?: HTMLAudioElement;
@@ -16,12 +18,14 @@ export type QrScannerOptions = {
 export default class ScannerQR {
   videoEl: HTMLVideoElement;
   onCodeDetected: (value: string) => void;
+  setterGuest: (key: keyof GuestProps, value: GuestProps[typeof key]) => void;
   options: QrScannerOptions;
 
   canvasEl?: HTMLCanvasElement;
   sound: boolean = false;
 
   isRunning: boolean = false;
+  isScanning: boolean = false;
 
   scanInterval: Timer | null = null;
   dismissTimeout: Timer | null = null;
@@ -30,17 +34,19 @@ export default class ScannerQR {
   constructor(
     videoEl: typeof ScannerQR.prototype.videoEl,
     onCodeDetected: typeof ScannerQR.prototype.onCodeDetected,
+    setterGuest: typeof ScannerQR.prototype.setterGuest,
     options: typeof ScannerQR.prototype.options
   ) {
     this.videoEl = videoEl;
     this.onCodeDetected = onCodeDetected;
+    this.setterGuest = setterGuest;
     this.options = options;
 
     this.canvasEl = options.canvas;
     this.sound = options.sound || false;
 
     this.initVideo().then(() => {
-      this.runScanner();
+      // this.runScanner();
     });
   }
 
@@ -62,6 +68,10 @@ export default class ScannerQR {
           this.videoEl.play().then(() => {
             console.log("video playing...");
             this.isRunning = true;
+
+            this.setterGuest("sound", this.sound);
+            this.setterGuest("scanner", this);
+
             resolve();
           });
         };
@@ -80,6 +90,9 @@ export default class ScannerQR {
         this.dismissTimeout = null;
       }
 
+      this.isScanning = false;
+      this.setterGuest("isScanning", this.isScanning);
+
       console.log("scanner stopped...");
     }
   }
@@ -93,6 +106,9 @@ export default class ScannerQR {
       () => this.detectCode(),
       this.options.scanningInterval || 100
     );
+
+    this.isScanning = true;
+    this.setterGuest("isScanning", this.isScanning);
 
     console.log("scanner running...");
   }
@@ -185,6 +201,8 @@ export default class ScannerQR {
       this.videoEl.srcObject = null;
       this.videoEl.src = "";
       this.isRunning = false;
+
+      this.setterGuest("isScanning", false);
     }
   }
 

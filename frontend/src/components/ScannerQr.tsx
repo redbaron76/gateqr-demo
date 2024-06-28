@@ -3,36 +3,25 @@ import Counter from "./Counter";
 import Guest from "@/components/Guest";
 import Invalid from "@/components/Invalid";
 import Pausing from "@/components/Pausing";
-import QrFrame from "@/assets/qr-frame.svg";
 import React from "react";
 import Reset from "@/components/Reset";
 import Sound from "@/components/Sound";
+import ViewFinder from "./ViewFinder";
 import useMeasure from "react-use-measure";
 import useScannerQr from "@/hooks/useScannerQr";
 
 const ScannerQr: React.FC = () => {
   const [ref, bounds] = useMeasure();
-  const {
-    bg,
-    currentGuest,
-    audioEl,
-    qrBoxEl,
-    canvasEl,
-    videoEl,
-    toggleScanner,
-  } = useScannerQr(bounds);
-
-  React.useEffect(() => {
-    console.log();
-  }, [bg]);
+  const { bg, currentGuest, audioEl, canvasEl, videoEl, tapScanner } =
+    useScannerQr(bounds);
 
   return (
     <div
       ref={ref}
       className="relative w-full flex flex-col flex-grow justify-center items-center bg-black"
-      onClick={toggleScanner}
+      onClick={tapScanner}
     >
-      <div className="text-xs font-thin text-white animate-pulse">
+      <div className="text-xs font-thin text-white uppercase animate-pulse">
         Starting scanner...
       </div>
 
@@ -50,12 +39,7 @@ const ScannerQr: React.FC = () => {
         className="absolute inset-0 object-cover w-full h-full"
       ></video>
 
-      <div
-        ref={qrBoxEl}
-        className="absolute !top-1/2 !-translate-y-1/2 !left-1/2 !-translate-x-1/2 !w-56 !h-56"
-      >
-        <img src={QrFrame} alt="qr-frame" className="w-56 h-56" />
-      </div>
+      <ViewFinder />
 
       <canvas
         ref={canvasEl}
@@ -64,11 +48,12 @@ const ScannerQr: React.FC = () => {
         className="absolute inset-0 object-cover w-full h-full"
       ></canvas>
 
+      <Reset />
+      <Sound />
+
       <Invalid bg={bg} />
       <Guest guest={currentGuest} bg={bg} />
 
-      <Reset />
-      <Sound />
       <Counter />
       <Pausing />
     </div>
