@@ -12,7 +12,8 @@ export type ScanBackground =
   | "bg-amber-500";
 
 export type Guest = {
-  provider: Provider;
+  _id: string;
+  _provider: Provider;
 } & Record<string, string>;
 
 export type GuestProps = {
@@ -35,14 +36,17 @@ interface GuestStore extends GuestProps {
   setGuest: (key: keyof GuestProps, value: GuestProps[typeof key]) => void;
 }
 
+const defaultGuest: Guest = {
+  _id: "",
+  _provider: "gateqr",
+};
+
 export const useGuestStore = create<GuestStore>()(
   persist(
     immer((set, get) => ({
       bg: "bg-black",
       guests: [],
-      currentGuest: {
-        provider: "gateqr",
-      },
+      currentGuest: defaultGuest,
       isPausing: false,
       isScanning: false,
       sound: false,
@@ -60,7 +64,7 @@ export const useGuestStore = create<GuestStore>()(
           }
 
           const guest = decodeBase64(data);
-          if (guest.provider !== "gateqr") {
+          if (guest._provider !== "gateqr") {
             throw new Error(
               `Invalid QR code: ${JSON.stringify(guest, null, 2)}`
             );
@@ -82,7 +86,7 @@ export const useGuestStore = create<GuestStore>()(
           console.log("checkQrData ERROR:", error);
           set((state) => {
             state.bg = "bg-red-500";
-            state.currentGuest = { provider: "gateqr" };
+            state.currentGuest = defaultGuest;
           });
         } finally {
           if (runFinally) resumeScanner(to);
@@ -98,7 +102,7 @@ export const useGuestStore = create<GuestStore>()(
         const timeOut = setTimeout(async () => {
           set((state) => {
             state.bg = "bg-black";
-            state.currentGuest = { provider: "gateqr" };
+            state.currentGuest = defaultGuest;
           });
           scanner?.runScanner();
         }, to);
@@ -132,7 +136,7 @@ export const useGuestStore = create<GuestStore>()(
           isPausing: false,
           timeOut: undefined,
           scanner: undefined,
-          currentGuest: { provider: "gateqr" },
+          currentGuest: defaultGuest,
         });
       },
 

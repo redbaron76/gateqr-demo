@@ -11,7 +11,7 @@ export const generateZipFile = async (file: File) => {
   let i = 1;
 
   for (const row of csv) {
-    const code = rowToBase64(row);
+    const code = rowToBase64(row, i);
     const qrcode = await generateVectorQRCode(code, "svg");
 
     // get keys from row
@@ -24,7 +24,7 @@ export const generateZipFile = async (file: File) => {
     const last = val[1].replace(/ /g, "_");
 
     // add file to zip
-    zip.file(`${last}_${first}_${i}.svg`, qrcode);
+    zip.file(`${i}_${last}_${first}.svg`, qrcode);
 
     // increment i
     i++;

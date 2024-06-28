@@ -14,8 +14,10 @@ type Props = {
 const Guest: React.FC<Props> = ({ bg, guest }) => {
   if (bg !== "bg-green-500" && bg !== "bg-amber-500") return null;
 
-  // remove "provider" from Guest
-  const entries = Object.entries(guest).filter(([key]) => key !== "provider");
+  // remove "_provider" and "_id" from Guest
+  const entries = Object.entries(guest)
+    .filter(([key]) => key !== "_provider")
+    .filter(([key]) => key !== "_id");
 
   return (
     <div
