@@ -3,6 +3,8 @@ import { parseCSV, rowToBase64 } from "./csvparser";
 import JSZip from "jszip";
 import { generateVectorQRCode } from "./qrcode";
 
+const addZero = (i: number) => (i < 10 ? `0${i}` : i);
+
 export const generateZipFile = async (file: File) => {
   const csv = await parseCSV(file);
 
@@ -24,7 +26,7 @@ export const generateZipFile = async (file: File) => {
     const last = val[1].replace(/ /g, "_");
 
     // add file to zip
-    zip.file(`${i}_${last}_${first}.svg`, qrcode);
+    zip.file(`${addZero(i)}_${last}_${first}.svg`, qrcode);
 
     // increment i
     i++;
