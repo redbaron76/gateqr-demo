@@ -45,7 +45,7 @@ const Guest: React.FC<Props> = ({ bg, guest }) => {
           size = "text-lg";
         }
 
-        if (value.length > 20) size = "text-lg";
+        if (value?.length > 20) size = "text-lg";
 
         return (
           <div key={`${key}-${i}`} className="text-white">
