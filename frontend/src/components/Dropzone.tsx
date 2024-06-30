@@ -67,7 +67,7 @@ const Dropzone = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center mt-4 gap-2">
-          <h3 className="text-sm font-bold">How to create a *.csv file?</h3>
+          <h3 className="text-sm font-bold">How to format your *.csv file?</h3>
           <a
             href="#"
             title="Get a *.csv sample file"

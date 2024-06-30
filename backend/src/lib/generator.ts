@@ -1,38 +1,56 @@
+import { generateImageQRCode, generateVectorQRCode } from "./qrcode";
 import { parseCSV, rowToBase64 } from "./csvparser";
 
 import JSZip from "jszip";
-import { generateVectorQRCode } from "./qrcode";
 
 const addZero = (i: number) => (i < 10 ? `0${i}` : i);
 
 export const generateCodeZipFile = async (file: File) => {
-  const csv = await parseCSV(file);
+  try {
+    const csv = await parseCSV(file);
 
-  const zip = new JSZip();
+    const zip = new JSZip();
 
-  let i = 1;
+    const license = Bun.file("./backend/assets/License.txt");
 
-  for (const row of csv) {
-    const code = rowToBase64(row, i);
-    const qrcode = await generateVectorQRCode(code, "svg");
+    const licenseText = await license.text();
 
-    // get keys from row
-    const values = Object.values(row);
+    zip.file("License.txt", licenseText);
 
-    // map keys to lowercase
-    const val = values.map((value) => value.toLowerCase());
+    const svgs = zip.folder("SVGs - printable");
+    const pngs = zip.folder("PNGs - web");
 
-    const first = val[0].replace(/ /g, "_");
-    const last = val[1].replace(/ /g, "_");
+    let i = 1;
 
-    // add file to zip
-    zip.file(`${addZero(i)}_${last}_${first}.svg`, qrcode);
+    for (const row of csv) {
+      const code = rowToBase64(row, i);
+      const svgCode = await generateVectorQRCode(code, "svg");
+      const pngCode = await generateImageQRCode(code, "png");
 
-    // increment i
-    i++;
+      // get keys from row
+      const values = Object.values(row);
+
+      // map keys to lowercase
+      const val = values.map((value) => value.toLowerCase());
+
+      const first = val[0].replace(/ /g, "_");
+      const last = val[1].replace(/ /g, "_");
+
+      // add file to svg folder
+      if (svgs) svgs.file(`${addZero(i)}_${last}_${first}.svg`, svgCode);
+      if (pngs) pngs.file(`${addZero(i)}_${last}_${first}.png`, pngCode);
+
+      // increment i
+      i++;
+    }
+
+    const zipBuffer = await zip.generateAsync({ type: "arraybuffer" });
+
+    console.log("zipBuffer", zipBuffer);
+
+    return zipBuffer;
+  } catch (error) {
+    console.error("Error generating zip file:", error);
+    return null;
   }
-
-  const buffer = await zip.generateAsync({ type: "arraybuffer" });
-
-  return buffer;
 };

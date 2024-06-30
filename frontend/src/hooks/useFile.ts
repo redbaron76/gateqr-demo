@@ -52,12 +52,12 @@ export function useFile() {
       }
 
       response.blob().then((blob) => {
-        saveAs(blob, `${new Date().getTime()}.zip`);
+        saveAs(blob, `Gate_QR_${new Date().getTime()}.zip`);
         setLoading(false);
         setFile(null);
       });
     } catch (error) {
-      console.error("Error uploading file:", error);
+      console.log("Error uploading file:", error);
       alert("Error uploading file!");
     }
   };
