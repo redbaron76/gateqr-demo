@@ -20,5 +20,7 @@ export const saveAs = (blob: Blob, filename: string) => {
 export const tsToDate = (timestamp: string) => {
   const ts = parseInt(timestamp);
   const d = new Date(ts);
-  return `${d.getDate()}/${d.getMonth()} ${d.getHours()}:${d.getMinutes()}`;
+  let month: string | number = d.getMonth() + 1;
+  if (month < 10) month = `0${month}`;
+  return `${d.getDate()}/${d.getMonth() + 1} ${d.getHours()}:${d.getMinutes()}`;
 };
