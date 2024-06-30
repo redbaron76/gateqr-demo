@@ -21,7 +21,7 @@ function Index() {
           We provide <span className="underline">print-ready</span>{" "}
           <span className="font-bold">QR codes</span> to deliver plus a{" "}
           <span className="underline">web-based</span>{" "}
-          <span className="font-bold">QR scanner</span> to scan them.
+          <span className="font-bold">QR Code scanner</span> to scan them.
         </h2>
       </div>
 
