@@ -7,7 +7,7 @@ const addZero = (i: number) => (i < 10 ? `0${i}` : i);
 
 export const generateCodeZipFile = async (file: File) => {
   try {
-    const csv = await parseCSV(file);
+    const csvObj = await parseCSV(file);
 
     const zip = new JSZip();
 
@@ -22,7 +22,7 @@ export const generateCodeZipFile = async (file: File) => {
 
     let i = 1;
 
-    for (const row of csv) {
+    for (const row of csvObj) {
       const code = rowToBase64(row, i);
       const svgCode = await generateVectorQRCode(code, "svg");
       const pngCode = await generateImageQRCode(code, "png");
