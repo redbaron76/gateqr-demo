@@ -11,7 +11,7 @@ const Sound: React.FC = () => {
     setGuest: store.setGuest,
   }));
 
-  if (bg !== "bg-black") return null;
+  if (!scanner || bg !== "bg-black") return null;
 
   return (
     <button

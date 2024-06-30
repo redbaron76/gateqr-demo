@@ -13,7 +13,9 @@
   "dependencies": {
     "@heroicons/react": "^2.1.4",
     "@radix-ui/react-alert-dialog": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-router": "^1.40.0",
     "barcode-detector": "^2.2.7",
@@ -29,6 +31,7 @@
     "react-use-measure": "^2.1.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
+    "vaul": "^0.9.1",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

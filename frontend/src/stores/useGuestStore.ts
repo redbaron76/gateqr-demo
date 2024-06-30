@@ -33,7 +33,10 @@ interface GuestStore extends GuestProps {
   decodeBase64: (base64: string) => Guest;
   resumeScanner: (timeOut: number) => void;
   tapScanner: () => void;
+  toggleScanner: (state: boolean) => void;
   resetScannerState: () => void;
+  getHeaderEntries: () => string[];
+  getEntries: (guest: Guest) => [string, string][];
   setGuest: (key: keyof GuestProps, value: GuestProps[typeof key]) => void;
 }
 
@@ -84,7 +87,7 @@ export const useGuestStore = create<GuestStore>()(
           // add new _checkTime to guest object or retrieve first one
           guest._checkTime = guestPresent
             ? guestPresent._checkTime
-            : new Date().toLocaleString();
+            : new Date().getTime().toString();
 
           set((state) => {
             state.bg = guestPresent ? "bg-amber-500" : "bg-green-500";
@@ -139,6 +142,11 @@ export const useGuestStore = create<GuestStore>()(
         }
       },
 
+      toggleScanner: (state) => {
+        const { scanner } = get();
+        state ? scanner?.stopScanner() : scanner?.runScanner();
+      },
+
       resetScannerState: () => {
         set({
           bg: "bg-black",
@@ -147,6 +155,31 @@ export const useGuestStore = create<GuestStore>()(
           scanner: undefined,
           currentGuest: defaultGuest,
         });
+      },
+
+      getHeaderEntries: () => {
+        const { guests } = get();
+        if (guests.length === 0) return [];
+        const entries = Object.keys(guests[0]).filter(
+          (key) => key !== "_provider" && key !== "_id" && key !== "_checkTime"
+        );
+
+        // add empty string to the first element
+        entries.unshift("Check time");
+
+        return entries;
+      },
+
+      getEntries: (guest) => {
+        const entries = Object.entries(guest).filter(
+          ([key]) => key !== "_provider" && key !== "_id"
+        );
+
+        // move last element to the first
+        const last = entries.pop();
+        if (last) entries.unshift(last);
+
+        return entries;
       },
 
       setGuest: (key, value) => {

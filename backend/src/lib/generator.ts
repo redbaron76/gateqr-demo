@@ -5,7 +5,7 @@ import { generateVectorQRCode } from "./qrcode";
 
 const addZero = (i: number) => (i < 10 ? `0${i}` : i);
 
-export const generateZipFile = async (file: File) => {
+export const generateCodeZipFile = async (file: File) => {
   const csv = await parseCSV(file);
 
   const zip = new JSZip();

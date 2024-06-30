@@ -98,19 +98,21 @@ export default class ScannerQR {
   }
 
   runScanner(): void {
-    // Initialize barcode detector
-    this.barcodeDetector = new BarcodeDetector({ formats: ["qr_code"] });
+    if (!this.scanInterval) {
+      // Initialize barcode detector
+      this.barcodeDetector = new BarcodeDetector({ formats: ["qr_code"] });
 
-    // Start scanning for QR codes
-    this.scanInterval = setInterval(
-      () => this.detectCode(),
-      this.options.scanningInterval || 100
-    );
+      // Start scanning for QR codes
+      this.scanInterval = setInterval(
+        () => this.detectCode(),
+        this.options.scanningInterval || 100
+      );
 
-    this.isScanning = true;
-    this.setterGuest("isScanning", this.isScanning);
+      this.isScanning = true;
+      this.setterGuest("isScanning", this.isScanning);
 
-    console.log("scanner running...");
+      console.log("scanner running...");
+    }
   }
 
   async detectCode(): Promise<void> {
@@ -176,6 +178,16 @@ export default class ScannerQR {
       if (ctx) {
         console.log("removing code path...");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+  }
+
+  toggleScanner(): void {
+    if (this.isRunning) {
+      if (this.isScanning) {
+        this.stopScanner();
+      } else {
+        this.runScanner();
       }
     }
   }

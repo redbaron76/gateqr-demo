@@ -6,7 +6,8 @@ import Pausing from "@/components/Pausing";
 import React from "react";
 import Reset from "@/components/Reset";
 import Sound from "@/components/Sound";
-import ViewFinder from "./ViewFinder";
+import TapLayer from "@/components/TapLayer";
+import ViewFinder from "@/components/ViewFinder";
 import useMeasure from "react-use-measure";
 import useScannerQr from "@/hooks/useScannerQr";
 
@@ -50,11 +51,13 @@ const ScannerQr: React.FC = () => {
 
       <Reset />
       <Sound />
+      <Counter />
+
+      <TapLayer />
 
       <Invalid bg={bg} />
       <Guest guest={currentGuest} bg={bg} />
 
-      <Counter />
       <Pausing />
     </div>
   );

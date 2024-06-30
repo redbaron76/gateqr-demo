@@ -5,6 +5,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import React from "react";
+import { tsToDate } from "@/lib/utils";
 
 type Props = {
   bg: ScanBackground;
@@ -40,16 +41,22 @@ const Guest: React.FC<Props> = ({ bg, guest }) => {
 
       {entries.map(([key, value], i) => {
         let size = "text-2xl";
+        let label = key;
+
         if (key === "_checkTime") {
-          key = "Check Time";
+          label = "Check time";
+          value = tsToDate(value);
           size = "text-lg";
         }
 
-        if (value?.length > 20) size = "text-lg";
+        if (value && value.length > 20) size = "text-lg";
 
         return (
-          <div key={`${key}-${i}`} className="text-white">
-            <span className="">{key}</span>
+          <div
+            key={`${key}-${i}`}
+            className={`text-white ${key === "_checkTime" ? "mt-4" : ""}`}
+          >
+            <span className="">{label}</span>
             <div className={`font-bold break-words ${size}`}>{value}</div>
           </div>
         );

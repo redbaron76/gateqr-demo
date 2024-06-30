@@ -67,7 +67,7 @@ export function useFile() {
   ) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/upload", {
+      const response = await fetch("/api/download", {
         method: "GET",
       });
 

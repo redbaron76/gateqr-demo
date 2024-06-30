@@ -16,3 +16,9 @@ export const saveAs = (blob: Blob, filename: string) => {
   a.click();
   URL.revokeObjectURL(url);
 };
+
+export const tsToDate = (timestamp: string) => {
+  const ts = parseInt(timestamp);
+  const d = new Date(ts);
+  return `${d.getDate()}/${d.getMonth()} ${d.getHours()}:${d.getMinutes()}`;
+};

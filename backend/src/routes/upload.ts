@@ -1,15 +1,10 @@
 import { Hono } from "hono";
-import { generateZipFile } from "../lib/generator";
+import { generateCodeZipFile } from "../lib/generator";
 import { uploadSchema } from "../validators/upload";
 import { zValidator } from "@hono/zod-validator";
 
 export const uploadRoute = new Hono()
-  .get("/", async (c) => {
-    const file = Bun.file("./backend/assets/sample.csv");
-    const buffer = await file.arrayBuffer();
-
-    return c.body(buffer);
-  })
+  // RICEVE csv dalla Dropzone
   .post(
     "/",
     zValidator("form", uploadSchema, (result, c) => {
@@ -23,7 +18,7 @@ export const uploadRoute = new Hono()
       const body = c.req.valid("form");
       const file = body["file"];
 
-      const buffer = await generateZipFile(file);
+      const buffer = await generateCodeZipFile(file);
 
       return c.body(buffer);
     }
