@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import dayjs from "dayjs";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,8 +20,7 @@ export const saveAs = (blob: Blob, filename: string) => {
 
 export const tsToDate = (timestamp: string) => {
   const ts = parseInt(timestamp);
-  const d = new Date(ts);
-  let month: string | number = d.getMonth() + 1;
-  if (month < 10) month = `0${month}`;
-  return `${d.getDate()}/${d.getMonth() + 1} ${d.getHours()}:${d.getMinutes()}`;
+  const d = dayjs(ts);
+
+  return d.format("DD/MM HH:mm:ss");
 };

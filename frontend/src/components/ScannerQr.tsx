@@ -1,5 +1,5 @@
 import Beep from "@/assets/beep.mp3";
-import Counter from "./Counter";
+import Counter from "@/components/Counter";
 import Guest from "@/components/Guest";
 import Invalid from "@/components/Invalid";
 import Pausing from "@/components/Pausing";
