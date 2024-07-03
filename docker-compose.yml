@@ -3,7 +3,9 @@ services:
   redis:
     container_name: redis
     hostname: redis
-    image: redis
+    image: redis:alpine
+    environment:
+      - NODE_ENV=development
     ports:
       - "6379:6379"
 

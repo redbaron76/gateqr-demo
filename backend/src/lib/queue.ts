@@ -3,26 +3,33 @@ import Queue from "bull";
 import { generateCodeZipFileJob } from "./generator";
 import { unlink } from "node:fs/promises";
 
-// const uploadQueue = new Queue<GenerateCodes>("redis://127.0.0.1:6379");
-const uploadQueue = new Queue<GenerateCodes>(process.env["REDIS_HOST"]!);
+console.log("NODE_ENV", process.env.NODE_ENV);
+console.log("REDIS_HOST", process.env["REDIS_HOST"]);
+console.log("REDIS_PORT", process.env["REDIS_PORT"]);
 
-uploadQueue.on("on waiting", (jobId) => {
+// const uploadQueue = new Queue<GenerateCodes>("redis://127.0.0.1:6379");
+const uploadQueue = new Queue<GenerateCodes>(
+  "gate-qr",
+  `redis://${process.env["REDIS_HOST"]}:${process.env["REDIS_PORT"]}`
+);
+
+uploadQueue.on("waiting", (jobId) => {
   console.log("WAITING", jobId);
 });
 
-uploadQueue.on("on active", (job, _jobPromise) => {
+uploadQueue.on("active", (job, _jobPromise) => {
   console.log("ACTIVE", job.id);
 });
 
-uploadQueue.on("on completed", (job) => {
+uploadQueue.on("completed", (job) => {
   console.log("COMPLETED", job.id);
 });
 
-uploadQueue.on("on error", (error) => {
+uploadQueue.on("error", (error) => {
   console.log("ERROR", error);
 });
 
-uploadQueue.on("on failed", (job, error) => {
+uploadQueue.on("failed", (job, error) => {
   console.log("FAILED", job.id, error);
 });
 

@@ -6,6 +6,12 @@ WORKDIR /usr/src/app
 
 COPY . .
 
+# if "temp" dir exists, remove it
+RUN rm -rf temp
+
+# create "temp" dir and assign write permissions to "bun" user
+RUN mkdir temp && chown bun temp
+
 # [optional] tests & build
 ENV NODE_ENV=production
 

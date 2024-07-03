@@ -10,7 +10,7 @@ const addZero = (i: number) => (i < 10 ? `0${i}` : i);
 export const writeFileToTempFolder = async (file: File) => {
   const arrayBuffer = await file.arrayBuffer();
   const fileName = new Date().getTime();
-  const tmpPath = `./backend/temp/${fileName}.csv`;
+  const tmpPath = `./temp/${fileName}.csv`;
   await Bun.write(tmpPath, new Uint8Array(arrayBuffer));
   return tmpPath;
 };
