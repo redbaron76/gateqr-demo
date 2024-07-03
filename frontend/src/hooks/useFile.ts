@@ -1,67 +1,7 @@
 import React from "react";
 import { saveAs } from "file-saver";
-import { useDropzone } from "react-dropzone";
 
 export default function useFile() {
-  const [file, setFile] = React.useState<File | null>(null);
-  const [loading, setLoading] = React.useState(false);
-
-  const onDrop = React.useCallback((acceptedFiles: File[]) => {
-    // console.log("Files dropped:", acceptedFiles);
-    if (acceptedFiles) setFile(acceptedFiles[0]);
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    multiple: false,
-    accept: {
-      "text/csv": [".csv"],
-    },
-  });
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files) setFile(files[0]);
-  };
-
-  const handleCancel = () => {
-    setFile(null);
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-
-    if (!file) {
-      alert("No file selected!");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const data = await response.json();
-        alert(data.message);
-      }
-
-      response.blob().then((blob) => {
-        saveAs(blob, `Gate_QR_${new Date().getTime()}.zip`);
-        setLoading(false);
-        setFile(null);
-      });
-    } catch (error) {
-      console.log("Error uploading file:", error);
-      alert("Error uploading file!");
-    }
-  };
-
   const handleSampleDownload = async (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
@@ -94,16 +34,7 @@ export default function useFile() {
   };
 
   return {
-    file,
-    loading,
-    hasFileSelected: !!file,
-    isDragActive,
     handleSampleDownload,
-    getRootProps,
-    getInputProps,
-    handleFileChange,
-    handleSubmit,
-    handleCancel,
     bytesToSize,
   };
 }

@@ -1,18 +1,19 @@
 import { ArrowPathIcon, CloudArrowUpIcon } from "@heroicons/react/24/solid";
 
 import { Button } from "@/components/ui/button";
+import useFile from "@/hooks/useFile";
 import useJob from "@/hooks/useJob";
 
 // import useFile from "@/hooks/useFile";
 
 const Dropzone = () => {
+  const { handleSampleDownload, bytesToSize } = useFile();
+
   const {
-    handleSampleDownload,
     handleCancel,
     handleSubmit,
     getInputProps,
     getRootProps,
-    bytesToSize,
     hasFileSelected,
     isDragActive,
     buttonLabel,
