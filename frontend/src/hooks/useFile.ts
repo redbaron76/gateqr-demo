@@ -2,7 +2,7 @@ import React from "react";
 import { saveAs } from "file-saver";
 import { useDropzone } from "react-dropzone";
 
-export function useFile() {
+export default function useFile() {
   const [file, setFile] = React.useState<File | null>(null);
   const [loading, setLoading] = React.useState(false);
 

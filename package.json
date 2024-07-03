@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",
+    "bull": "^4.15.0",
     "csv-simple-parser": "^1.0.3",
     "hono": "^4.4.7",
     "jszip": "^3.10.1",

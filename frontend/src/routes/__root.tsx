@@ -8,7 +8,7 @@ export const Route = createRootRoute({
           <Link to="/">
             <img
               src="/logo.svg"
-              alt="GATE-QR"
+              alt="GATE:QR"
               width={96}
               height={26}
               className="w-24 h-auto"

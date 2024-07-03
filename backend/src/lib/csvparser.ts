@@ -5,6 +5,10 @@ export const parseCSV = async (file: File) => {
   return parse(csv, { header: true }) as Record<string, string>[];
 };
 
+export const parseTextCSV = async (text: string) => {
+  return parse(text, { header: true }) as Record<string, string>[];
+};
+
 export const rowToBase64 = (
   row: Record<string, string>,
   id?: number

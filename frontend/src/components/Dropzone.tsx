@@ -1,7 +1,9 @@
 import { ArrowPathIcon, CloudArrowUpIcon } from "@heroicons/react/24/solid";
 
 import { Button } from "@/components/ui/button";
-import { useFile } from "@/hooks/useFile";
+import useJob from "@/hooks/useJob";
+
+// import useFile from "@/hooks/useFile";
 
 const Dropzone = () => {
   const {
@@ -13,9 +15,10 @@ const Dropzone = () => {
     bytesToSize,
     hasFileSelected,
     isDragActive,
+    buttonLabel,
     loading,
     file,
-  } = useFile();
+  } = useJob();
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -57,7 +60,8 @@ const Dropzone = () => {
             {loading && (
               <ArrowPathIcon className="size-4 mr-1 text-neutral-300 animate-spin" />
             )}
-            {loading ? "Generating codes..." : "Upload file"}
+            {/* {loading ? `Generating codes (${progress}%) ...` : "Upload file"} */}
+            {buttonLabel}
           </Button>
           {!loading && (
             <Button variant="link" className="text-xs" onClick={handleCancel}>
