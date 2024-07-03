@@ -30,12 +30,17 @@ export default function useJob() {
   const [loading, setLoading] = React.useState(false);
 
   const [buttonLabel, setButtonLabel] = React.useState<string>("Upload file");
+  const [error, setError] = React.useState<string>("");
 
   const fileRef = React.useRef<string>("");
 
-  const onDrop = React.useCallback((acceptedFiles: File[]) => {
-    if (acceptedFiles) setFile(acceptedFiles[0]);
-  }, []);
+  const onDrop = React.useCallback(
+    (acceptedFiles: File[]) => {
+      if (acceptedFiles) setFile(acceptedFiles[0]);
+      if (error) setError("");
+    },
+    [error]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -59,11 +64,15 @@ export default function useJob() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
+    // set file
     if (files) setFile(files[0]);
+    // reset error if any
+    if (error) setError("");
   };
 
   const handleCancel = () => {
     setFile(null);
+    setError("");
     setLoading(false);
     setProgress(0);
     setJobId(null);
@@ -93,7 +102,7 @@ export default function useJob() {
       if (!response.ok) {
         const data = await response.json();
         handleCancel();
-        alert(data.message);
+        return setError(data.message);
       }
 
       const { state, jobId }: JobResponse = await response.json();
@@ -118,7 +127,7 @@ export default function useJob() {
           clearInterval(interval);
           handleCancel();
           const data = await response.json();
-          alert(data.message);
+          return setError(data.message);
         }
 
         const data = await response.json();
@@ -161,6 +170,7 @@ export default function useJob() {
     file,
 
     jobId,
+    error,
     status,
     loading,
     progress,

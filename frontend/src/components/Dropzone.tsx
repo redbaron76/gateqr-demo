@@ -18,21 +18,28 @@ const Dropzone = () => {
     isDragActive,
     buttonLabel,
     loading,
+    error,
     file,
   } = useJob();
+
+  const errorWrapper = error
+    ? "border-red-800 bg-red-200"
+    : "border-neutral-600 bg-neutral-300";
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div
         {...getRootProps()}
-        className="flex flex-col justify-center items-center w-80 h-40 border-4 border-dashed border-neutral-600 p-4 rounded-xl bg-neutral-300 gap-2"
+        className={`flex flex-col justify-center items-center w-80 h-40 border-4 border-dashed  p-4 rounded-xl gap-2 ${errorWrapper}`}
       >
         <input {...getInputProps()} />
         <CloudArrowUpIcon
-          className={`size-16 ${hasFileSelected ? "text-blue-600" : "text-neutral-600"}  ${loading ? "animate-pulse" : ""}`}
+          className={`size-16 ${error ? "text-red-800" : hasFileSelected ? "text-blue-600" : "text-neutral-600"}  ${loading ? "animate-pulse" : ""}`}
         />
         <p className="text-base text-center text-neutral-600">
-          {hasFileSelected ? (
+          {error ? (
+            <span className="text-red-800">{error}</span>
+          ) : hasFileSelected ? (
             <span className="flex flex-col">
               <span>
                 Selected file: <strong>{file?.name}</strong>

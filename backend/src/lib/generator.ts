@@ -33,7 +33,9 @@ export const generateCodeZipFile = async (file: File) => {
     let i = 1;
 
     for (const row of csvObj) {
+      // encode row object in base64
       const code = rowToBase64(row, i);
+      // base64 becomes qr code
       const svgCode = await generateVectorQRCode(code, "svg");
       const pngCode = await generateImageQRCode(code, "png");
 
