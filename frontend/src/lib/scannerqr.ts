@@ -1,6 +1,7 @@
 import { BarcodeDetector, Point2D } from "barcode-detector";
 
 import { GuestProps } from "@/stores/useGuestStore";
+import { log } from "@/lib/utils";
 
 export type QrScannerOptions = {
   canvas?: HTMLCanvasElement;
@@ -66,7 +67,7 @@ export default class ScannerQR {
       return new Promise((resolve) => {
         this.videoEl.onloadedmetadata = () => {
           this.videoEl.play().then(() => {
-            console.log("video playing...");
+            log("video playing...");
             this.isRunning = true;
 
             this.setterGuest("sound", this.sound);
@@ -93,7 +94,7 @@ export default class ScannerQR {
       this.isScanning = false;
       this.setterGuest("isScanning", this.isScanning);
 
-      console.log("scanner stopped...");
+      log("scanner stopped...");
     }
   }
 
@@ -111,7 +112,7 @@ export default class ScannerQR {
       this.isScanning = true;
       this.setterGuest("isScanning", this.isScanning);
 
-      console.log("scanner running...");
+      log("scanner running...");
     }
   }
 
@@ -125,7 +126,7 @@ export default class ScannerQR {
       const qrcode = codes[0];
       const { rawValue, cornerPoints } = qrcode;
 
-      console.log("QR code value:", rawValue);
+      log("QR code value:", rawValue);
       this.onCodeDetected(rawValue);
       this.vibrate();
       this.beep();
@@ -176,7 +177,7 @@ export default class ScannerQR {
       const ctx = canvas.getContext("2d");
 
       if (ctx) {
-        console.log("removing code path...");
+        log("removing code path...");
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
     }
@@ -194,7 +195,7 @@ export default class ScannerQR {
 
   destroy(): void {
     if (this.isRunning) {
-      console.log("destroying scanner...");
+      log("destroying scanner...");
 
       // Stop scanning
       if (this.scanInterval) clearInterval(this.scanInterval);

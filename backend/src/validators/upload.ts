@@ -9,14 +9,14 @@ export const uploadSchema = z.object({
     .instanceof(File)
     .refine((file) => {
       return file.size <= MAX_UPLOAD_SIZE;
-    }, "File must be less than 1MB in size")
+    }, "size")
     .refine((file) => {
       return ACCEPTED_FILE_TYPES.includes(file.type);
-    }, "File must be of type *.csv")
+    }, "type")
     .refine(async (file) => {
       const csvObj = await parseCSV(file);
       const row = csvObj[0];
       const values = Object.values(row);
       return values.length <= 4;
-    }, "Use a *.csv file with max 4 columns"),
+    }, "shape"),
 });

@@ -3,6 +3,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import ScannerQR from "@/lib/scannerqr";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { log } from "@/lib/utils";
 
 export type Provider = "gateqr";
 export type ScanBackground =
@@ -95,7 +96,7 @@ export const useGuestStore = create<GuestStore>()(
             if (!guestPresent) state.guests.push(guest);
           });
         } catch (error) {
-          console.log("checkQrData ERROR:", error);
+          log("checkQrData ERROR:", error);
           set((state) => {
             state.bg = "bg-red-500";
             state.currentGuest = defaultGuest;

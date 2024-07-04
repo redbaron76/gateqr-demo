@@ -1,0 +1,62 @@
+{
+  "root": {
+    "generator": "Generator",
+    "scanner": "Scanner"
+  },
+  "index": {
+    "h1": "The all-in-one solution for managing entrance access.",
+    "h2": "You provide the guest list with fields you want.<1/>We provide <3>print-ready</3> <4>QR codes</4> to deliver plus a <6>web-based</6> <7>QR Code scanner</7> to scan them.",
+    "h3": "Generate your guest list now!",
+    "scannerButton": "QR Code Scanner"
+  },
+  "Counter": {
+    "title": "Guest list",
+    "description": "Checked-in guests by code scanning",
+    "downloadList": "Download list"
+  },
+  "Dropzone": {
+    "selectFile": "Select file",
+    "onDrop": "Drop your <1>*.csv</1> file here...",
+    "drop": "Drop a <1>*.csv</1> file here<3/>or <5>click</5> to select it from disk.",
+    "howToFormat": "How to format your *.csv file?",
+    "getSample": "Get a sample here"
+  },
+  "Guest": {
+    "alreadyChecked": "Code already checked!"
+  },
+  "Invalid": {
+    "notAllowed": "QR Code not allowed!"
+  },
+  "Pausing": {
+    "resume": "Tap to resume"
+  },
+  "Reset": {
+    "title": "Are you absolutely sure?",
+    "description": "Would you like to definitely reset all the guest list?",
+    "proceed": "Yes, proceed!"
+  },
+  "ScannerQR": {
+    "startingScanner": "Starting scanner..."
+  },
+  "TapLayer": {
+    "tapToScan": "Tap to start scanning"
+  },
+  "useJob": {
+    "generatingCodes": "Generating codes ({{progress}}%)...",
+    "packingFile": "Packing *.zip file...",
+    "uploadFile": "Upload file",
+    "noFileSelected": "No file selected!",
+    "errorUploadingFile": "Error uploading file!"
+  },
+  "label": {
+    "cancel": "Cancel",
+    "showIn": "Show in"
+  },
+  "server": {
+    "uploadSchema": {
+      "size": "File size must be less than 1MB",
+      "type": "File type must be of type *.csv",
+      "shape": "Use a *.csv file with max 4 columns"
+    }
+  }
+}

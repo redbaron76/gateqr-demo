@@ -10,11 +10,14 @@ import TapLayer from "@/components/TapLayer";
 import ViewFinder from "@/components/ViewFinder";
 import useMeasure from "react-use-measure";
 import useScannerQr from "@/hooks/useScannerQr";
+import useTranslate from "@/hooks/useTranslate";
 
 const ScannerQr: React.FC = () => {
   const [ref, bounds] = useMeasure();
   const { bg, currentGuest, audioEl, canvasEl, videoEl, tapScanner } =
     useScannerQr(bounds);
+
+  const { t } = useTranslate();
 
   return (
     <div
@@ -23,7 +26,7 @@ const ScannerQr: React.FC = () => {
       onClick={tapScanner}
     >
       <div className="text-xs font-thin text-white uppercase animate-pulse">
-        Starting scanner...
+        {t("ScannerQR.startingScanner")}
       </div>
 
       <audio ref={audioEl} src={Beep} preload="auto" className="hidden" />

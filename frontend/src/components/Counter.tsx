@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { tsToDate } from "@/lib/utils";
 import useCounter from "@/hooks/useCounter";
+import useTranslate from "@/hooks/useTranslate";
 
 const Counter: React.FC = () => {
   const {
@@ -33,6 +34,8 @@ const Counter: React.FC = () => {
     handleOpen,
     handleDownloadLiist,
   } = useCounter();
+
+  const { t } = useTranslate();
 
   if (!scanner) return null;
 
@@ -46,10 +49,10 @@ const Counter: React.FC = () => {
       </DrawerTrigger>
       <DrawerContent className="h-[85dvh]">
         <DrawerHeader className="text-left">
-          <DrawerTitle className="text-neutral-600">Guest list</DrawerTitle>
-          <DrawerDescription>
-            Checked-in guests by code scanning
-          </DrawerDescription>
+          <DrawerTitle className="text-neutral-600">
+            {t("Counter.title")}
+          </DrawerTitle>
+          <DrawerDescription>{t("Counter.description")}</DrawerDescription>
         </DrawerHeader>
 
         <Table className="text-xs">
@@ -88,10 +91,10 @@ const Counter: React.FC = () => {
             onClick={handleDownloadLiist}
           >
             <CloudArrowDownIcon className="size-5 text-white mr-2" />
-            Download list
+            {t("Counter.downloadList")}
           </Button>
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button variant="outline">{t("label.cancel")}</Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>

@@ -24,3 +24,6 @@ export const tsToDate = (timestamp: string) => {
 
   return d.format("DD/MM HH:mm:ss");
 };
+
+export const log = (...args: unknown[]) =>
+  import.meta.env.MODE !== "production" && console.log(...args);

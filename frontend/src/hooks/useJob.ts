@@ -1,6 +1,8 @@
 import React from "react";
+import { log } from "@/lib/utils";
 import { saveAs } from "file-saver";
 import { useDropzone } from "react-dropzone";
+import useTranslate from "@/hooks/useTranslate";
 
 export type JobResponse = {
   state: JobStatus;
@@ -33,6 +35,8 @@ export default function useJob() {
   const [error, setError] = React.useState<string>("");
 
   const fileRef = React.useRef<string>("");
+
+  const { t } = useTranslate();
 
   const onDrop = React.useCallback(
     (acceptedFiles: File[]) => {
@@ -84,8 +88,7 @@ export default function useJob() {
     setProgress(0);
 
     if (!file) {
-      alert("No file selected!");
-      return;
+      return alert(t("useJob.noFileSelected"));
     }
 
     const formData = new FormData();
@@ -111,8 +114,8 @@ export default function useJob() {
 
       await monitorJob(jobId);
     } catch (error) {
-      console.log("Error uploading file:", error);
-      alert("Error uploading file!");
+      log("Error uploading file:", error);
+      return alert(t("useJob.errorUploadingFile"));
     }
   };
 
@@ -157,14 +160,14 @@ export default function useJob() {
     setButtonLabel(() => {
       switch (true) {
         case loading && progress < 100:
-          return `Generating codes (${progress}%) ...`;
+          return t("useJob.generatingCodes", { progress });
         case progress === 100 && status === "active":
-          return "Packing *.zip file ...";
+          return t("useJob.packingFile");
         default:
-          return "Upload file";
+          return t("useJob.uploadFile");
       }
     });
-  }, [loading, status, progress]);
+  }, [t, loading, status, progress]);
 
   return {
     file,

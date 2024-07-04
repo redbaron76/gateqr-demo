@@ -1,5 +1,7 @@
 # deps
 node_modules/
 
+backend/.DS_Store
+
 frontend/dist/
 frontend/node_modules/

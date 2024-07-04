@@ -6,6 +6,7 @@ import {
 
 import React from "react";
 import { tsToDate } from "@/lib/utils";
+import useTranslate from "@/hooks/useTranslate";
 
 type Props = {
   bg: ScanBackground;
@@ -13,6 +14,8 @@ type Props = {
 };
 
 const Guest: React.FC<Props> = ({ bg, guest }) => {
+  const { t } = useTranslate();
+
   if (bg !== "bg-green-500" && bg !== "bg-amber-500") return null;
 
   // remove "_provider" and "_id" from Guest
@@ -34,7 +37,7 @@ const Guest: React.FC<Props> = ({ bg, guest }) => {
         <div className="flex flex-col items-center gap-2 p-4 mb-10 rounded-2xl bg-white">
           <ExclamationTriangleIcon className="size-12 text-red-500" />
           <div className="font-bold text-xl break-words uppercase text-center text-red-500">
-            Code already checked!
+            {t("Guest.alreadyChecked")}
           </div>
         </div>
       )}

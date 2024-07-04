@@ -1,6 +1,7 @@
 import React from "react";
 import { RectReadOnly } from "react-use-measure";
 import ScannerQR from "@/lib/scannerqr";
+import { log } from "@/lib/utils";
 import { useGuestStore } from "@/stores/useGuestStore";
 
 export default function useScannerQr({ width, height }: RectReadOnly) {
@@ -80,7 +81,7 @@ export default function useScannerQr({ width, height }: RectReadOnly) {
         scanner.current?.destroy();
         resetScannerState();
         scanner.current = undefined;
-        console.log("Unmounting...");
+        log("Unmounting...");
       }
     };
   }, [width, height]);

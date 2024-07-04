@@ -13,8 +13,10 @@ import {
 import React from "react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useGuestStore } from "@/stores/useGuestStore";
+import useTranslate from "@/hooks/useTranslate";
 
 const Reset: React.FC = () => {
+  const { t } = useTranslate();
   const { bg, counter, scanner, setGuest } = useGuestStore((store) => ({
     bg: store.bg,
     counter: store.guests.length,
@@ -35,18 +37,18 @@ const Reset: React.FC = () => {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogTitle>{t("Reset.title")}</AlertDialogTitle>
           <AlertDialogDescription>
-            Would you like to reset all the guest list?
+            {t("Reset.description")}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>{t("label.cancel")}</AlertDialogCancel>
           <AlertDialogAction
             onClick={resetGuestList}
             className="bg-red-600 font-bold"
           >
-            Yes, proceed!
+            {t("Reset.proceed")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

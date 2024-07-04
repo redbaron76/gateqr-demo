@@ -1,12 +1,15 @@
 import { CursorArrowRaysIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { useGuestStore } from "@/stores/useGuestStore";
+import useTranslate from "@/hooks/useTranslate";
 
 const TapLayer: React.FC = () => {
   const { scanner, isScanning } = useGuestStore((store) => ({
     scanner: store.scanner,
     isScanning: store.isScanning,
   }));
+
+  const { t } = useTranslate();
 
   if (!scanner || isScanning) return null;
 
@@ -17,7 +20,7 @@ const TapLayer: React.FC = () => {
         <div className="flex flex-col justify-center items-center gap-4 text-white">
           <CursorArrowRaysIcon className="text-base text-white animate-pulse" />
           <span className="text-sm uppercase animate-pulse">
-            Tap to start scanning
+            {t("TapLayer.tapToScan")}
           </span>
         </div>
       </div>
