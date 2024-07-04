@@ -1,4 +1,6 @@
 import React from "react";
+import { api } from "@/lib/client";
+import { getErrorMessage } from "@/lib/utils";
 import { saveAs } from "file-saver";
 
 export default function useFile() {
@@ -7,21 +9,15 @@ export default function useFile() {
   ) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/download", {
-        method: "GET",
-      });
+      const response = await api.download.$get();
 
-      if (!response.ok) {
-        const data = await response.json();
-        alert(data.message);
-      }
+      if (!response.ok) throw new Error("Error downloading sample file!");
 
       response.blob().then((blob) => {
         saveAs(blob, "sample.csv");
       });
     } catch (error) {
-      console.error("Error downloading sample file:", error);
-      alert("Error downloading sample file!");
+      alert(getErrorMessage(error));
     }
   };
 

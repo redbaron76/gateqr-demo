@@ -53,6 +53,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      "@backend": path.resolve(__dirname, "../backend"),
       "@": path.resolve(__dirname, "./src"),
     },
   },

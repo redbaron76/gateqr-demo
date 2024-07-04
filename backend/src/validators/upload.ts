@@ -1,4 +1,4 @@
-import { parseCSV } from "../lib/csvparser";
+import { parseCSV } from "@/lib/csvparser";
 import { z } from "zod";
 
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 1; // 1MB

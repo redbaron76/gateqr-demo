@@ -1,9 +1,8 @@
-import type { GenerateCodes } from "../types/queue";
+import type { GenerateCodes } from "@/types/queue";
 import Queue from "bull";
-import { generateCodeZipFileJob } from "./generator";
+import { generateCodeZipFileJob } from "@/lib/generator";
 import { unlink } from "node:fs/promises";
 
-console.log("NODE_ENV", process.env.NODE_ENV);
 console.log("REDIS_HOST", process.env["REDIS_HOST"]);
 console.log("REDIS_PORT", process.env["REDIS_PORT"]);
 

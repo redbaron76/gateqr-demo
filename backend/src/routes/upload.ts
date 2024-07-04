@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import type { JobStatus } from "bull";
-import uploadQueue from "../lib/queue";
-import { uploadSchema } from "../validators/upload";
-import { writeFileToTempFolder } from "../lib/generator";
+import uploadQueue from "@/lib/queue";
+import { uploadSchema } from "@/validators/upload";
+import { writeFileToTempFolder } from "@/lib/generator";
 import { zValidator } from "@hono/zod-validator";
 
 export const uploadRoute = new Hono()
