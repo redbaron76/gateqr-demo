@@ -29,7 +29,7 @@
     "alreadyChecked": "Code already checked!"
   },
   "Invalid": {
-    "notAllowed": "QR Code not allowed!"
+    "notAllowed": "Code not valid!"
   },
   "Pausing": {
     "resume": "Tap to resume"

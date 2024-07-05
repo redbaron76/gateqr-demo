@@ -5,7 +5,8 @@ import { log } from "@/lib/utils";
 
 export type QrScannerOptions = {
   canvas?: HTMLCanvasElement;
-  audio?: HTMLAudioElement;
+  audioOk?: HTMLAudioElement;
+  audioKo?: HTMLAudioElement;
   scanningInterval?: number;
   detectTimeout?: number;
   detectColor?: string;
@@ -128,8 +129,8 @@ export default class ScannerQR {
 
       log("QR code value:", rawValue);
       this.onCodeDetected(rawValue);
-      this.vibrate();
-      this.beep();
+      // this.vibrate();
+      // this.beep();
 
       if (this.options.detectEnabled && cornerPoints) {
         this.drawCodePath(cornerPoints);
@@ -221,7 +222,13 @@ export default class ScannerQR {
 
   beep(): void {
     if (this.sound) {
-      this.options.audio?.play();
+      this.options.audioOk?.play();
+    }
+  }
+
+  wrong(): void {
+    if (this.sound) {
+      this.options.audioKo?.play();
     }
   }
 

@@ -29,7 +29,7 @@
     "alreadyChecked": "Codice già scansionato!"
   },
   "Invalid": {
-    "notAllowed": "Codice QR non valido!"
+    "notAllowed": "Codice non valido!"
   },
   "Pausing": {
     "resume": "Tocca per riprendere"

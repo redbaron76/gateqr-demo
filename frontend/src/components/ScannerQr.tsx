@@ -8,13 +8,14 @@ import Reset from "@/components/Reset";
 import Sound from "@/components/Sound";
 import TapLayer from "@/components/TapLayer";
 import ViewFinder from "@/components/ViewFinder";
+import Wrong from "@/assets/wrong.mp3";
 import useMeasure from "react-use-measure";
 import useScannerQr from "@/hooks/useScannerQr";
 import useTranslate from "@/hooks/useTranslate";
 
 const ScannerQr: React.FC = () => {
   const [ref, bounds] = useMeasure();
-  const { bg, currentGuest, audioEl, canvasEl, videoEl, tapScanner } =
+  const { bg, currentGuest, beepEl, wrongEl, canvasEl, videoEl, tapScanner } =
     useScannerQr(bounds);
 
   const { t } = useTranslate();
@@ -29,7 +30,8 @@ const ScannerQr: React.FC = () => {
         {t("ScannerQR.startingScanner")}
       </div>
 
-      <audio ref={audioEl} src={Beep} preload="auto" className="hidden" />
+      <audio ref={beepEl} src={Beep} preload="auto" className="hidden" />
+      <audio ref={wrongEl} src={Wrong} preload="auto" className="hidden" />
 
       <video
         ref={videoEl}

@@ -90,6 +90,9 @@ export const useGuestStore = create<GuestStore>()(
             ? guestPresent._checkTime
             : new Date().getTime().toString();
 
+          // play beep sound
+          scanner?.beep();
+
           set((state) => {
             state.bg = guestPresent ? "bg-amber-500" : "bg-green-500";
             state.currentGuest = guest;
@@ -101,6 +104,9 @@ export const useGuestStore = create<GuestStore>()(
             state.bg = "bg-red-500";
             state.currentGuest = defaultGuest;
           });
+
+          // play wrong sound
+          scanner?.wrong();
         } finally {
           if (runFinally) resumeScanner(to);
         }

@@ -7,7 +7,8 @@ import { useGuestStore } from "@/stores/useGuestStore";
 export default function useScannerQr({ width, height }: RectReadOnly) {
   const scanner = React.useRef<ScannerQR>();
   const videoEl = React.useRef<HTMLVideoElement>(null);
-  const audioEl = React.useRef<HTMLAudioElement>(null);
+  const beepEl = React.useRef<HTMLAudioElement>(null);
+  const wrongEl = React.useRef<HTMLAudioElement>(null);
   const canvasEl = React.useRef<HTMLCanvasElement>(null);
 
   const TO = 3000;
@@ -62,7 +63,8 @@ export default function useScannerQr({ width, height }: RectReadOnly) {
           detectEnabled: false,
           vibrate: false,
           sound: sound,
-          audio: audioEl.current!,
+          audioOk: beepEl.current!,
+          audioKo: wrongEl.current!,
           canvas: canvasEl.current!,
           constraints: {
             audio: false,
@@ -88,7 +90,8 @@ export default function useScannerQr({ width, height }: RectReadOnly) {
 
   return {
     bg,
-    audioEl,
+    beepEl,
+    wrongEl,
     videoEl,
     canvasEl,
     timeOut,
