@@ -3,9 +3,13 @@
     "generator": "Generatore",
     "scanner": "Scanner"
   },
+  "head": {
+    "title": "Generatori Codici QR e Gestione Lista Ospiti",
+    "description": "La soluzione tutto-in-uno per la gestione degli accessi all'ingresso."
+  },
   "index": {
     "h1": "La soluzione tutto-in-uno per la gestione degli accessi all'ingresso.",
-    "h2": "Tu fornisci la lista degli ospiti con i campi che vuoi.<1/>Noi ti diamo <4>codici QR</4> <3>pronti per la stampa</3> e uno <7>scanner</7> <6>web-based</6> per scansionarli.",
+    "h2": "Tu fornisci la lista degli ospiti con i campi che vuoi. Noi ti diamo <3>codici QR</3> <2>pronti per la stampa</2> e uno <6>scanner</6> <5>web-based</5> per scansionarli.",
     "h3": "Genera ora la tua lista ospiti!",
     "scannerButton": "Scanner Codici QR"
   },

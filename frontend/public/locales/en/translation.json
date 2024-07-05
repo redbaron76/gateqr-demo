@@ -3,9 +3,13 @@
     "generator": "Generator",
     "scanner": "Scanner"
   },
+  "head": {
+    "title": "QR Code Generator and Guest List Management",
+    "description": "GATE:QR lets you generate guest lists from CSV files, offering printable QR codes and a web-based scanner for seamless check-in at your event gates."
+  },
   "index": {
     "h1": "The all-in-one solution for managing entrance access.",
-    "h2": "You provide the guest list with fields you want.<1/>We provide <3>print-ready</3> <4>QR codes</4> to deliver plus a <6>web-based</6> <7>QR Code scanner</7> to scan them.",
+    "h2": "You provide the guest list with fields you want. We provide <2>print-ready</2> <3>QR codes</3> to deliver plus a <5>web-based</5> <6>QR Code scanner</6> to scan them.",
     "h3": "Generate your guest list now!",
     "scannerButton": "QR Code Scanner"
   },

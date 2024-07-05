@@ -33,13 +33,13 @@ const Dropzone = () => {
     <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div
         {...getRootProps()}
-        className={`flex flex-col justify-center items-center w-80 h-40 border-4 border-dashed  p-4 rounded-xl gap-2 ${errorWrapper}`}
+        className={`flex flex-col justify-center items-center w-72 sm:w-80 md:w-96 h-40 md:h-52 border-4 border-dashed p-2 rounded-xl gap-2 ${errorWrapper}`}
       >
         <input {...getInputProps()} />
         <CloudArrowUpIcon
-          className={`size-16 ${error ? "text-red-800" : hasFileSelected ? "text-blue-600" : "text-neutral-600"}  ${loading ? "animate-pulse" : ""}`}
+          className={`size-16 md:size-20 ${error ? "text-red-800" : hasFileSelected ? "text-blue-600" : "text-neutral-600"}  ${loading ? "animate-pulse" : ""}`}
         />
-        <p className="text-base text-center text-neutral-600">
+        <p className="text-sm sm:text-base md:text-lg text-center text-neutral-600">
           {error ? (
             <span className="text-red-800">
               {t(`server.uploadSchema.${error}`)}
@@ -87,11 +87,13 @@ const Dropzone = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center mt-4 gap-2">
-          <h3 className="text-sm font-bold">{t("Dropzone.howToFormat")}</h3>
+          <h3 className="text-sm sm:text-sm md:text-base font-bold">
+            {t("Dropzone.howToFormat")}
+          </h3>
           <a
             href="#"
             title="Get a *.csv sample file"
-            className="text-xs text-neutral-500"
+            className="text-xs sm:text-sm md:text-base text-neutral-500"
             onClick={(e) => handleSampleDownload(e)}
           >
             {t("Dropzone.getSample")}
