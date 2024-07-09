@@ -3,6 +3,7 @@
   "scripts": {
     "generate": "drizzle-kit generate",
     "migrate": "drizzle-kit migrate",
+    "studio": "bunx drizzle-kit studio",
     "dev": "bun run --hot backend/src/index.ts",
     "build": "cd frontend && bun install && bun run build",
     "start": "bun run backend/src/index.ts",
