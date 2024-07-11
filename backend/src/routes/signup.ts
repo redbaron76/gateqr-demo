@@ -19,7 +19,7 @@ const signupRoute = new Hono<Context>()
     "/",
     zValidator("json", signupSchema, (result, c) => {
       if (!result.success) {
-        console.log("Body ERROR:", result.error);
+        log(result.error, "Body ERROR");
         const errors = result.error.errors.map((e) => e.message);
         return c.json({ success: result.success, message: errors[0] }, 400);
       }
@@ -28,7 +28,7 @@ const signupRoute = new Hono<Context>()
       const body = c.req.valid("json");
       const { email, password } = body;
 
-      console.log("SERVER", email, password);
+      log(email, password, "SERVER");
 
       try {
         const password_hash = await hash(password, {

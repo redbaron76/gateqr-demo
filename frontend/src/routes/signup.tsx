@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { api } from "@/lib/client";
 import { createFileRoute } from "@tanstack/react-router";
-import { log } from "console";
+import { log } from "@/lib/utils";
 import { useForm } from "@tanstack/react-form";
 import useTranslate from "@/hooks/useTranslate";
 import { z } from "zod";
