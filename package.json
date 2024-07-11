@@ -14,6 +14,8 @@
     "@libsql/client": "^0.7.0",
     "@lucia-auth/adapter-drizzle": "^1.0.7",
     "@lucia-auth/adapter-sqlite": "^3.0.2",
+    "@node-rs/argon2": "^1.8.3",
+    "@tanstack/zod-form-adapter": "^0.25.3",
     "bull": "^4.15.0",
     "csv-simple-parser": "^1.0.3",
     "drizzle-orm": "^0.31.2",
@@ -21,6 +23,7 @@
     "jszip": "^3.10.1",
     "lucia": "^3.2.0",
     "qrcode": "^1.5.3",
+    "resend": "^3.4.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {

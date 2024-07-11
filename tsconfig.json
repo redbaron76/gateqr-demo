@@ -23,12 +23,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noPropertyAccessFromIndexSignature": true,
+    "noErrorTruncation": true,
 
-    "baseUrl": ".",
+    "baseUrl": "./backend",
     "paths": {
-      "@assets/*": ["./backend/assets/*"],
-      "@temp/*": ["./temp/*"],
-      "@/*": ["./backend/src/*"]
+      "@assets/*": ["assets/*"],
+      "@/*": ["src/*"]
     }
   }
 }

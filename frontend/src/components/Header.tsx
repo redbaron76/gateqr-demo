@@ -71,6 +71,12 @@ const Header: React.FC = () => {
               className:
                 "group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50",
             },
+            {
+              link: "/signup",
+              label: "root.signup",
+              className:
+                "group inline-flex h-9 w-max items-center justify-center rounded-md bg-white px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-gray-100/50 data-[state=open]:bg-gray-100/50",
+            },
           ]}
         />
       </nav>
@@ -110,6 +116,12 @@ const Header: React.FC = () => {
                 {
                   link: "/scanner",
                   label: "root.scanner",
+                  className:
+                    "flex w-full items-center py-2 text-lg font-semibold",
+                },
+                {
+                  link: "/signup",
+                  label: "root.signup",
                   className:
                     "flex w-full items-center py-2 text-lg font-semibold",
                 },

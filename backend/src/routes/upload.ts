@@ -1,3 +1,4 @@
+import type { Context } from "@/types/env";
 import { Hono } from "hono";
 import type { JobStatus } from "bull";
 import uploadQueue from "@/lib/queue";
@@ -5,7 +6,7 @@ import { uploadSchema } from "@/validators/upload";
 import { writeFileToTempFolder } from "@/lib/generator";
 import { zValidator } from "@hono/zod-validator";
 
-export const uploadRoute = new Hono()
+const uploadRoute = new Hono<Context>()
   // RICEVE csv dalla Dropzone
   .post(
     "/",
@@ -58,3 +59,5 @@ export const uploadRoute = new Hono()
 
     return c.json({ state, progress, base64Data });
   });
+
+export default uploadRoute;

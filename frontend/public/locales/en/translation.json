@@ -1,7 +1,8 @@
 {
   "root": {
     "generator": "Generator",
-    "scanner": "Scanner"
+    "scanner": "Scanner",
+    "signup": "Sign Up"
   },
   "head": {
     "title": "QR Code Generator and Guest List Management",
@@ -12,6 +13,14 @@
     "h2": "You provide the guest list with fields you want. We provide <2>print-ready</2> <3>QR codes</3> to deliver plus a <5>web-based</5> <6>QR Code scanner</6> to scan them.",
     "h3": "Generate your guest list now!",
     "scannerButton": "QR Code Scanner"
+  },
+  "signup": {
+    "title": "Create your account",
+    "email": "E-mail",
+    "password": "Password",
+    "submit": "Sign Up",
+    "submitting": "Signing Up...",
+    "alreadyHaveAccount": "Already have an account?"
   },
   "Counter": {
     "title": "Guest list",
@@ -54,9 +63,15 @@
   },
   "label": {
     "cancel": "Cancel",
-    "showIn": "Show in"
+    "showIn": "Show in",
+    "validating": "Validating..."
   },
   "server": {
+    "signupSchema": {
+      "email": "Enter a valid e-mail address",
+      "password": "Password must be at least {{min}} characters long",
+      "emailAlreadyExists": "This e-mail address is already registered"
+    },
     "uploadSchema": {
       "size": "File size must be less than 1MB",
       "type": "File type must be of type *.csv",

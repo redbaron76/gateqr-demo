@@ -1,6 +1,7 @@
+import type { Context } from "@/types/env";
 import { Hono } from "hono";
 
-export const downloadRoute = new Hono()
+const downloadRoute = new Hono<Context>()
   // Riceve richiesta del file sample
   .get("/", async (c) => {
     const file = Bun.file("./backend/assets/sample.csv");
@@ -8,3 +9,5 @@ export const downloadRoute = new Hono()
 
     return c.body(buffer);
   });
+
+export default downloadRoute;

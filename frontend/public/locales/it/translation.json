@@ -1,7 +1,8 @@
 {
   "root": {
     "generator": "Generatore",
-    "scanner": "Scanner"
+    "scanner": "Scanner",
+    "signup": "Registrati"
   },
   "head": {
     "title": "Generatori Codici QR e Gestione Lista Ospiti",
@@ -12,6 +13,14 @@
     "h2": "Tu fornisci la lista degli ospiti con i campi che vuoi. Noi ti diamo <3>codici QR</3> <2>pronti per la stampa</2> e uno <6>scanner</6> <5>web-based</5> per scansionarli.",
     "h3": "Genera ora la tua lista ospiti!",
     "scannerButton": "Scanner Codici QR"
+  },
+  "signup": {
+    "title": "Crea il tuo account",
+    "email": "E-mail",
+    "password": "Password",
+    "submit": "Registrati",
+    "submitting": "Registrazione in corso...",
+    "alreadyHaveAccount": "Hai già un account?"
   },
   "Counter": {
     "title": "Lista invitati",
@@ -54,9 +63,15 @@
   },
   "label": {
     "cancel": "Annulla",
-    "showIn": "Mostra in"
+    "showIn": "Mostra in",
+    "validating": "Controllo..."
   },
   "server": {
+    "signupSchema": {
+      "email": "Inserisci un indirizzo e-mail valido",
+      "password": "La password deve contenere almeno {{min}} caratteri",
+      "emailAlreadyExists": "Questo indirizzo e-mail è già registrato"
+    },
     "uploadSchema": {
       "size": "Il file deve essere inferiore a 1MB",
       "type": "Il file deve essere di tipo *.csv",
