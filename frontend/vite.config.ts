@@ -1,6 +1,7 @@
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
-import { VitePWA } from "vite-plugin-pwa";
+// import { VitePWA } from "vite-plugin-pwa";
 import { defineConfig } from "vite";
+// import devServer from "@hono/vite-dev-server";
 import path from "path";
 import react from "@vitejs/plugin-react";
 
@@ -9,7 +10,7 @@ export default defineConfig({
   plugins: [
     react(),
     TanStackRouterVite(),
-    VitePWA({
+    /* VitePWA({
       includeAssets: [],
       manifest: {
         name: "GATE:QR.com",
@@ -49,7 +50,10 @@ export default defineConfig({
       devOptions: {
         enabled: false,
       },
-    }),
+    }), */
+    /* devServer({
+      entry: "../backend/src/app.ts",
+    }), */
   ],
   resolve: {
     alias: {

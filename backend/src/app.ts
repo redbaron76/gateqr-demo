@@ -6,6 +6,7 @@ import { csrf } from "hono/csrf";
 import { logger } from "hono/logger";
 import { serveStatic } from "hono/bun";
 import { session } from "@/middlewares/session";
+import { ssr } from "./middlewares/ssr";
 
 // import { createBunWebSocket } from "hono/bun";
 // const { upgradeWebSocket, websocket } = createBunWebSocket();
@@ -16,6 +17,8 @@ app.use("*", logger());
 app.use(csrf());
 
 app.use(session());
+
+app.use(ssr());
 
 const apiRoutes = app
   .basePath("/api")
@@ -38,8 +41,10 @@ const apiRoutes = app
   })
 ); */
 
-app.get("*", serveStatic({ root: "./frontend/dist" }));
-app.get("*", serveStatic({ path: "./frontend/dist/index.html" }));
+// app.get("*", serveStatic({ root: "./frontend/dist" }));
+app.get("*", serveStatic({ root: "./frontend/dist/client" }));
+// app.get("*", serveStatic({ path: "./frontend/dist/index.html" }));
+app.get("*", serveStatic({ path: "./frontend/dist/client/index.html" }));
 
 export default app;
 

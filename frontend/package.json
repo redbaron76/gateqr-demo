@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "bunx --bun vite",
-    "build": "bunx --bun vite build",
+    "build:main": "bunx --bun vite build",
+    "build": "bun run build:client && bun run build:server",
+    "build:client": "bunx --bun vite build --ssrManifest --outDir dist/client",
+    "build:server": "bunx --bun vite build --ssr src/entry-server.tsx --outDir dist/server",
     "serve": "vite preview",
     "ngrok": "ngrok http --region eu --subdomain gateqr 5173",
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/logo.svg",
@@ -43,6 +46,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@hono/vite-dev-server": "^0.13.1",
     "@tanstack/router-devtools": "^1.40.0",
     "@tanstack/router-plugin": "^1.39.13",
     "@types/file-saver": "^2.0.7",

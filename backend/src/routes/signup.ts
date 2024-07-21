@@ -2,12 +2,12 @@ import { getErrorMessage, log } from "@/lib/utils";
 
 import type { Context } from "@/types/env";
 import { Hono } from "hono";
-import { db } from "@/db";
+import { db } from "@/drizzle/db";
 import { generateId } from "lucia";
 import { hash } from "@node-rs/argon2";
 import { lucia } from "@/lib/lucia";
 import { signupSchema } from "@/validators/signup";
-import { users } from "@/db/schema";
+import { users } from "@/drizzle/schema";
 import { zValidator } from "@hono/zod-validator";
 
 const signupRoute = new Hono<Context>()

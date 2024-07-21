@@ -1,6 +1,6 @@
-import { db } from "@/db";
+import { db } from "@/drizzle/db";
 import { eq } from "drizzle-orm";
-import { users } from "@/db/schema";
+import { users } from "@/drizzle/schema";
 import { z } from "zod";
 
 export const signupSchema = z.object({
