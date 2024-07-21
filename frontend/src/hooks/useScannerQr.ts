@@ -1,7 +1,7 @@
 import React from "react";
 import { RectReadOnly } from "react-use-measure";
-import ScannerQR from "@/lib/scannerqr";
-import { log } from "@/lib/utils";
+import ScannerQR from "@/libs/scannerqr";
+import { log } from "@/libs/utils";
 import { useGuestStore } from "@/stores/useGuestStore";
 
 export default function useScannerQr({ width, height }: RectReadOnly) {

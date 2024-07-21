@@ -1,6 +1,6 @@
 import React from "react";
-import { api } from "@/lib/client";
-import { getErrorMessage } from "@/lib/utils";
+import { api } from "@/libs/client";
+import { getErrorMessage } from "@/libs/utils";
 import { saveAs } from "file-saver";
 
 export default function useFile() {
@@ -13,7 +13,7 @@ export default function useFile() {
 
       if (!response.ok) throw new Error("Error downloading sample file!");
 
-      response.blob().then((blob) => {
+      response.blob().then((blob: Blob) => {
         saveAs(blob, "sample.csv");
       });
     } catch (error) {

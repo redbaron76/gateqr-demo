@@ -1,12 +1,13 @@
-import { downloadRoute, signupRoute, uploadRoute } from "./routes";
-
 import type { Context } from "@/types/env";
 import { Hono } from "hono";
 import { csrf } from "hono/csrf";
+import downloadRoute from "@/routes/download";
 import { logger } from "hono/logger";
 import { serveStatic } from "hono/bun";
 import { session } from "@/middlewares/session";
-import { ssr } from "./middlewares/ssr";
+import signupRoute from "@/routes/signup";
+import { ssr } from "@/middlewares/ssr";
+import uploadRoute from "@/routes/upload";
 
 // import { createBunWebSocket } from "hono/bun";
 // const { upgradeWebSocket, websocket } = createBunWebSocket();

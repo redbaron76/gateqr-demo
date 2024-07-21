@@ -1,5 +1,5 @@
 import React from "react";
-import { log } from "@/lib/utils";
+import { log } from "@/libs/utils";
 import { saveAs } from "file-saver";
 import { useDropzone } from "react-dropzone";
 import useTranslate from "@/hooks/useTranslate";

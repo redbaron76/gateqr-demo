@@ -1,4 +1,4 @@
-import { saveAs, tsToDate } from "@/lib/utils";
+import { saveAs, tsToDate } from "@/libs/utils";
 
 import React from "react";
 import { useGuestStore } from "@/stores/useGuestStore";

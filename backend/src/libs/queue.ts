@@ -1,7 +1,7 @@
 import type { GenerateCodes } from "@/types/queue";
 import Queue from "bull";
-import { generateCodeZipFileJob } from "@/lib/generator";
-import { log } from "@/lib/utils";
+import { generateCodeZipFileJob } from "@/libs/generator";
+import { log } from "@/libs/utils";
 import { unlink } from "node:fs/promises";
 
 log(process.env["REDIS_HOST"], "REDIS_HOST");

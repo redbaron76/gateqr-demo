@@ -1,11 +1,11 @@
-import { getErrorMessage, log } from "@/lib/utils";
+import { getErrorMessage, log } from "@/libs/utils";
 
 import type { Context } from "@/types/env";
 import { Hono } from "hono";
 import { db } from "@/drizzle/db";
 import { generateId } from "lucia";
 import { hash } from "@node-rs/argon2";
-import { lucia } from "@/lib/lucia";
+import { lucia } from "@/libs/lucia";
 import { signupSchema } from "@/validators/signup";
 import { users } from "@/drizzle/schema";
 import { zValidator } from "@hono/zod-validator";

@@ -1,7 +1,7 @@
 import { BarcodeDetector, Point2D } from "barcode-detector";
 
 import { GuestProps } from "@/stores/useGuestStore";
-import { log } from "@/lib/utils";
+import { log } from "@/libs/utils";
 
 export type QrScannerOptions = {
   canvas?: HTMLCanvasElement;

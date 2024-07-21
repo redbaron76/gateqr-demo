@@ -1,5 +1,5 @@
 import { createMiddleware } from "hono/factory";
-import { lucia } from "@/lib/lucia";
+import { lucia } from "@/libs/lucia";
 
 export const session = () => {
   return createMiddleware(async (c, next) => {

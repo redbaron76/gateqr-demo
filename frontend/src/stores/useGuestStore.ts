@@ -1,9 +1,9 @@
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import ScannerQR from "@/lib/scannerqr";
+import ScannerQR from "@/libs/scannerqr";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { log } from "@/lib/utils";
+import { log } from "@/libs/utils";
 
 export type Provider = "gateqr";
 export type ScanBackground =

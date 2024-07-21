@@ -20,7 +20,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { tsToDate } from "@/lib/utils";
+import { tsToDate } from "@/libs/utils";
 import useCounter from "@/hooks/useCounter";
 import useTranslate from "@/hooks/useTranslate";
 

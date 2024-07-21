@@ -5,7 +5,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import React from "react";
-import { tsToDate } from "@/lib/utils";
+import { tsToDate } from "@/libs/utils";
 import useTranslate from "@/hooks/useTranslate";
 
 type Props = {
