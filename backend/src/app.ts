@@ -27,6 +27,10 @@ const apiRoutes = app
   .route("/signup", signupRoute)
   .route("/upload", uploadRoute);
 
+const route = app.get("/test", async (c) => {
+  return c.json({ success: true });
+});
+
 /* app.get(
   "/ws",
   upgradeWebSocket((_c) => {
@@ -49,4 +53,6 @@ app.get("*", serveStatic({ path: "./frontend/dist/client/index.html" }));
 
 export default app;
 
-export type ApiRoutes = typeof apiRoutes;
+// export type ApiRoutes = typeof apiRoutes;
+
+export type ApiRoutes = typeof route;
