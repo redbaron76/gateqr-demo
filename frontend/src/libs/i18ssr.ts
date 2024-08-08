@@ -1,5 +1,7 @@
 import * as availableLocales from "@/locales";
 
+import { useTranslateStore } from "@/stores/useTranslateStore";
+
 type i18LocalesOptions = {
   defaultLocale?: string;
   langPlaceholder?: string;
@@ -11,7 +13,7 @@ type Locale = {
 
 class i18SSR {
   // Defaults
-  defaultLocale: string = "en";
+  defaultLocale: string = useTranslateStore.getState().currentLocale;
   currentLocale: string = this.defaultLocale;
 
   localePlaceholder: string = "%s";

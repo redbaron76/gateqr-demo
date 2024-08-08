@@ -1,10 +1,10 @@
-import type { Context } from "@/types/env";
+import { type Context } from "@/types/env";
 import { Hono } from "hono";
-import type { JobStatus } from "bull";
-import { log } from "@/lib/utils";
-import uploadQueue from "@/lib/queue";
+import { type JobStatus } from "bull";
+import { log } from "@/libs/utils";
+import uploadQueue from "@/libs/queue";
 import { uploadSchema } from "@/validators/upload";
-import { writeFileToTempFolder } from "@/lib/generator";
+import { writeFileToTempFolder } from "@/libs/generator";
 import { zValidator } from "@hono/zod-validator";
 
 const uploadRoute = new Hono<Context>()

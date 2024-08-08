@@ -27,7 +27,7 @@ const FieldInfo: React.FC<FieldMetaType> = ({ meta, min }) => {
     <div className="text-red-500 text-xs p-1">
       {meta.isValidating
         ? t("label.validatiing")
-        : t(`server.signupSchema.${meta.errors[0]}`, { min })}
+        : t(`server.signupSchema.${meta.errors[0]}`, min || 0)}
     </div>
   ) : null;
 };
@@ -92,9 +92,7 @@ function Signup() {
               name="password"
               validators={{
                 onChange: z.string().min(8, {
-                  message: t("password", {
-                    min: 8,
-                  }),
+                  message: t("password", 8),
                 }),
               }}
               children={(field) => (

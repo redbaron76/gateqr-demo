@@ -12,7 +12,7 @@ export const lang = {
   },
   index: {
     h1: "The all-in-one solution for managing entrance access.",
-    h2: "You provide the guest list with fields you want. We provide <2>print-ready</2> <3>QR codes</3> to deliver plus a <5>web-based</5> <6>QR Code scanner</6> to scan them.",
+    h2: "You provide the guest list with fields you want. We provide <strong class=\"font-bold\">print-ready</strong> <u>QR codes</u> to deliver plus a <strong class=\"font-bold\">web-based</strong> <u>QR Code scanner</u> to scan them.",
     h3: "Generate your guest list now!",
     scannerButton: "QR Code Scanner",
   },
@@ -31,8 +31,8 @@ export const lang = {
   },
   Dropzone: {
     selectFile: "Select file",
-    onDrop: "Drop your <1>*.csv</1> file here...",
-    drop: "Drop a <1>*.csv</1> file here<3/>or <5>click</5> to select it from disk.",
+    onDrop: "Drop your <strong>*.csv</strong> file here...",
+    drop: "Drop a <strong>*.csv</strong> file here<br/>or <strong>click</strong> to select it from disk.",
     howToFormat: "How to format your *.csv file?",
     getSample: "Get a sample here",
   },
@@ -57,7 +57,7 @@ export const lang = {
     tapToScan: "Tap to start scanning",
   },
   useJob: {
-    generatingCodes: "Generating codes ({{progress}}%)...",
+    generatingCodes: "Generating codes (%s%)...",
     packingFile: "Packing *.zip file...",
     uploadFile: "Upload file",
     noFileSelected: "No file selected!",

@@ -1,4 +1,4 @@
-import type { GenerateCodes } from "@/types/queue";
+import { type GenerateCodes } from "@/types/queue";
 import Queue from "bull";
 import { generateCodeZipFileJob } from "@/libs/generator";
 import { log } from "@/libs/utils";

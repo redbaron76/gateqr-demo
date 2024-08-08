@@ -1,6 +1,6 @@
 import { getErrorMessage, log } from "@/libs/utils";
 
-import type { Context } from "@/types/env";
+import { type Context } from "@/types/env";
 import { Hono } from "hono";
 import { db } from "@/drizzle/db";
 import { generateId } from "lucia";

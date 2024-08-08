@@ -12,7 +12,7 @@ export const lang = {
   },
   index: {
     h1: "La soluzione tutto-in-uno per la gestione degli accessi all'ingresso.",
-    h2: "Tu fornisci la lista degli ospiti con i campi che vuoi. Noi ti diamo <3>codici QR</3> <2>pronti per la stampa</2> e uno <6>scanner</6> <5>web-based</5> per scansionarli.",
+    h2: "Tu fornisci la lista degli ospiti con i campi che vuoi. Noi ti diamo <strong class=\"font-bold\">codici QR</strong> <u>pronti per la stampa</u> e uno <strong class=\"font-bold\">scanner</strong> <u>web-based</u> per scansionarli.",
     h3: "Genera ora la tua lista ospiti!",
     scannerButton: "Scanner Codici QR",
   },
@@ -31,8 +31,8 @@ export const lang = {
   },
   Dropzone: {
     selectFile: "Seleziona file",
-    onDrop: "Rilascia il tuo file <1>*.csv</1> qui...",
-    drop: "Rilascia un file <1>*.csv</1> qui<3/>o <5>clicca</5> per selezionarlo dal disco.",
+    onDrop: "Rilascia il tuo file <strong>*.csv</strong> qui...",
+    drop: "Rilascia un file <strong>*.csv</strong> qui<br/>o <strong>clicca</strong> per selezionarlo dal disco.",
     howToFormat: "Come formattare il tuo file *.csv?",
     getSample: "Scarica un esempio qui",
   },
@@ -57,7 +57,7 @@ export const lang = {
     tapToScan: "Tocca per avviare lo scanner",
   },
   useJob: {
-    generatingCodes: "Genero i codici ({{progress}}%)...",
+    generatingCodes: "Genero i codici (%s%)...",
     packingFile: "Comprimo il file *.zip...",
     uploadFile: "Carica file",
     noFileSelected: "Nessun file selezionato!",

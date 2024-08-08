@@ -160,7 +160,7 @@ export default function useJob() {
     setButtonLabel(() => {
       switch (true) {
         case loading && progress < 100:
-          return t("useJob.generatingCodes", { progress });
+          return t("useJob.generatingCodes", progress);
         case progress === 100 && status === "active":
           return t("useJob.packingFile");
         default:

@@ -1,7 +1,7 @@
 import { generateImageQRCode, generateVectorQRCode } from "@/libs/qrcode";
 import { parseCSV, parseTextCSV, rowToBase64 } from "@/libs/csvparser";
 
-import type { GenerateCodes } from "@/types/queue";
+import { type GenerateCodes } from "@/types/queue";
 import JSZip from "jszip";
 import Queue from "bull";
 
