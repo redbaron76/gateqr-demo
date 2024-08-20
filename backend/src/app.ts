@@ -45,9 +45,9 @@ const apiRoutes = app
 ); */
 
 // app.get("*", serveStatic({ root: "./frontend/dist" }));
-app.get("*", serveStatic({ root: "./frontend/dist/client" }));
+app.get("*", serveStatic({ root: "./remix/build/client" }));
 // app.get("*", serveStatic({ path: "./frontend/dist/index.html" }));
-app.get("*", serveStatic({ path: "./frontend/dist/client/index.html" }));
+// app.get("*", serveStatic({ path: "./frontend/dist/client/index.html" }));
 
 export default app;
 
