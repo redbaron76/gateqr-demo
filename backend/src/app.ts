@@ -1,11 +1,9 @@
-// import downloadRoute from "@/routes/download";
-// import signupRoute from "@/routes/signup";
-// import uploadRoute from "@/routes/upload";
-
 import { downloadRoute, signupRoute, uploadRoute } from "@/routes";
 
 import { type Context } from "@/types/env";
 import { Hono } from "hono";
+import { csrf } from "hono/csrf";
+import { session } from "@/middlewares/session";
 
 import { logger } from "hono/logger";
 import { serveStatic } from "hono/bun";
@@ -16,6 +14,9 @@ import { serveStatic } from "hono/bun";
 const app = new Hono<Context>();
 
 app.use("*", logger());
+app.use(csrf());
+
+app.use(session());
 
 const apiRoutes = app
   .basePath("/api")
