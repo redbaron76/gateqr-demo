@@ -1,17 +1,19 @@
+import { type Context } from "@/types/env";
 import { Hono } from "hono";
-import type { JobStatus } from "bull";
+import { type JobStatus } from "bull";
+import { log } from "@/lib/utils";
 import uploadQueue from "@/lib/queue";
 import { uploadSchema } from "@/validators/upload";
 import { writeFileToTempFolder } from "@/lib/generator";
 import { zValidator } from "@hono/zod-validator";
 
-export const uploadRoute = new Hono()
+const uploadRoute = new Hono<Context>()
   // RICEVE csv dalla Dropzone
   .post(
     "/",
     zValidator("form", uploadSchema, (result, c) => {
       if (!result.success) {
-        console.log("Body ERROR:", result.error);
+        log(result.error, "Body ERROR");
         const errors = result.error.errors.map((e) => e.message);
         return c.json({ success: result.success, message: errors[0] }, 400);
       }
@@ -27,8 +29,8 @@ export const uploadRoute = new Hono()
       const job = await uploadQueue.add("generate-codes", { path: tmpPath });
       const state = await job.getState();
 
-      console.log("Job added", job.id);
-      console.log("Job state", state);
+      log(job.id, "Job added");
+      log(state, "Job state");
 
       // Ritorna il job id
       return c.json({ state, jobId: job.id });
@@ -45,16 +47,18 @@ export const uploadRoute = new Hono()
     }
 
     const state = (await job.getState()) as JobStatus;
-    // console.log("Job state", state);
+    // log(state, "Job state");
     const progress = (await job.progress()) as number;
-    // console.log("Job progress", progress);
+    // log(progress, "Job progress");
 
     let base64Data = "";
 
     if (state === "completed") {
       base64Data = (await job.finished()) as string;
-      // console.log("Job base64Data", base64Data?.length);
+      log(base64Data?.length, "Job base64Data");
     }
 
     return c.json({ state, progress, base64Data });
   });
+
+export default uploadRoute;

@@ -1,19 +1,26 @@
+// import downloadRoute from "@/routes/download";
+// import signupRoute from "@/routes/signup";
+// import uploadRoute from "@/routes/upload";
+
+import { downloadRoute, signupRoute, uploadRoute } from "@/routes";
+
+import { type Context } from "@/types/env";
 import { Hono } from "hono";
-// import { createBunWebSocket } from "hono/bun";
-import { downloadRoute } from "@/routes/download";
+
 import { logger } from "hono/logger";
 import { serveStatic } from "hono/bun";
-import { uploadRoute } from "@/routes/upload";
 
+// import { createBunWebSocket } from "hono/bun";
 // const { upgradeWebSocket, websocket } = createBunWebSocket();
 
-const app = new Hono();
+const app = new Hono<Context>();
 
 app.use("*", logger());
 
 const apiRoutes = app
   .basePath("/api")
   .route("/download", downloadRoute)
+  .route("/signup", signupRoute)
   .route("/upload", uploadRoute);
 
 // app.get("/test", (c) => {
@@ -39,4 +46,5 @@ app.get("*", serveStatic({ root: "./frontend/dist" }));
 app.get("*", serveStatic({ path: "./frontend/dist/index.html" }));
 
 export default app;
+
 export type ApiRoutes = typeof apiRoutes;

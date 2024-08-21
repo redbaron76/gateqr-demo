@@ -23,6 +23,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noPropertyAccessFromIndexSignature": true,
+    "noErrorTruncation": true,
 
     "baseUrl": ".",
     "paths": {
