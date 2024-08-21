@@ -1,21 +1,23 @@
-import { Trans, useTranslation } from "react-i18next";
+import i18ssr from "@/lib/i18ssr";
+import { useTranslateStore } from "@/stores/useTranslateStore";
 
-type Opt = {
-  ns?: Parameters<typeof useTranslation>[0];
-  options?: Parameters<typeof useTranslation>[1];
-};
+export default function useTranslate(initLocale?: string) {
+  i18ssr.setInitialLocale(initLocale);
 
-export default function useTranslate(ns?: Opt["ns"], options?: Opt["options"]) {
-  const { t, i18n } = useTranslation(ns, options);
+  const { currentLocale, setCurrentLocale } = useTranslateStore((store) => ({
+    currentLocale: store.currentLocale,
+    setCurrentLocale: store.setCurrentLocale,
+  }));
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
+  // on change locale...
+  const setLocale = (locale: string) => {
+    setCurrentLocale(locale);
+    i18ssr.setLocale(locale);
   };
 
   return {
-    t,
-    lang: i18n.language,
-    changeLanguage,
-    Trans,
+    ...i18ssr,
+    setLocale,
+    currentLocale,
   };
 }

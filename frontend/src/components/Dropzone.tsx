@@ -1,6 +1,7 @@
 import { ArrowPathIcon, CloudArrowUpIcon } from "@heroicons/react/24/solid";
 
 import { Button } from "@/components/ui/button";
+import Locale from "@/components/Locale";
 import useFile from "@/hooks/useFile";
 import useJob from "@/hooks/useJob";
 import useTranslate from "@/hooks/useTranslate";
@@ -23,7 +24,7 @@ const Dropzone = () => {
     file,
   } = useJob();
 
-  const { t, Trans } = useTranslate();
+  const { t } = useTranslate();
 
   const errorWrapper = error
     ? "border-red-800 bg-red-200"
@@ -41,29 +42,20 @@ const Dropzone = () => {
         />
         <p className="text-sm sm:text-base md:text-lg text-center text-neutral-600">
           {error ? (
-            <span className="text-red-800">
+            <Locale as="span" className="text-red-800">
               {t(`server.uploadSchema.${error}`)}
-            </span>
+            </Locale>
           ) : hasFileSelected ? (
             <span className="flex flex-col">
-              <span>
+              <Locale as="span">
                 {t("Dropzone.selectFile")}: <strong>{file?.name}</strong>
-              </span>
+              </Locale>
               <span className="text-[10px]">[{bytesToSize(file!.size)}]</span>
             </span>
           ) : isDragActive ? (
-            <span>
-              <Trans i18nKey="Dropzone.onDrop">
-                Drop your <strong>*.csv</strong> file here...
-              </Trans>
-            </span>
+            <Locale as="span">{t("Dropzone.onDrop")}</Locale>
           ) : (
-            <span>
-              <Trans i18nKey="Dropzone.drop">
-                Drop a <strong>*.csv</strong> file here
-                <br /> or <strong>click</strong> to select it from disk.
-              </Trans>
-            </span>
+            <Locale as="span">{t("Dropzone.drop")}</Locale>
           )}
         </p>
       </div>
@@ -87,9 +79,9 @@ const Dropzone = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center mt-4 gap-2">
-          <h3 className="text-sm sm:text-sm md:text-base font-bold">
+          <Locale as="h3" className="text-sm sm:text-sm md:text-base font-bold">
             {t("Dropzone.howToFormat")}
-          </h3>
+          </Locale>
           <a
             href="#"
             title="Get a *.csv sample file"

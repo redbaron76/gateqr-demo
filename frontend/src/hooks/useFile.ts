@@ -13,7 +13,7 @@ export default function useFile() {
 
       if (!response.ok) throw new Error("Error downloading sample file!");
 
-      response.blob().then((blob) => {
+      response.blob().then((blob: Blob) => {
         saveAs(blob, "sample.csv");
       });
     } catch (error) {
