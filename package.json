@@ -8,15 +8,15 @@
   },
   "dependencies": {
     "@hono/zod-validator": "^0.2.2",
-    "bull": "^4.15.0",
+    "bull": "^4.16.0",
     "csv-simple-parser": "^1.0.3",
-    "hono": "^4.4.7",
+    "hono": "^4.5.7",
     "jszip": "^3.10.1",
-    "qrcode": "^1.5.3",
+    "qrcode": "^1.5.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.5",
+    "@types/bun": "^1.1.6",
     "@types/qrcode": "^1.5.5"
   }
 }
