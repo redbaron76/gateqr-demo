@@ -71,7 +71,7 @@ export const lang = {
   server: {
     signupSchema: {
       email: "Inserisci un indirizzo e-mail valido",
-      password: "La password deve contenere almeno {{min}} caratteri",
+      password: "La password deve contenere almeno %s caratteri",
       emailAlreadyExists: "Questo indirizzo e-mail è già registrato",
     },
     uploadSchema: {

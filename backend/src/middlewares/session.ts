@@ -1,11 +1,12 @@
 import { createMiddleware } from "hono/factory";
+import { log } from "@/lib/utils";
 import { lucia } from "@/lib/lucia";
 
 export const session = () => {
   return createMiddleware(async (c, next) => {
     const sessionId = lucia.readSessionCookie(c.req.header("Cookie") ?? "");
 
-    console.log("SESSION ID", sessionId);
+    log(sessionId, "SESSION ID middleware");
 
     if (!sessionId) {
       c.set("user", null);

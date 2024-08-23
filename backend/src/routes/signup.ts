@@ -2,13 +2,15 @@ import { getErrorMessage, log } from "@/lib/utils";
 
 import { type Context } from "@/types/env";
 import { Hono } from "hono";
-import { db } from "@/drizzle/db";
 import { generateId } from "lucia";
 import { hash } from "@node-rs/argon2";
 import { lucia } from "@/lib/lucia";
 import { signupSchema } from "@/validators/signup";
 import { users } from "@/drizzle/schema";
 import { zValidator } from "@hono/zod-validator";
+
+import { db } from "@/drizzle/db";
+import { eq } from "drizzle-orm";
 
 const signupRoute = new Hono<Context>()
   .get("/", async (c) => {
@@ -19,8 +21,8 @@ const signupRoute = new Hono<Context>()
     "/",
     zValidator("json", signupSchema, (result, c) => {
       if (!result.success) {
-        log(result.error, "Body ERROR");
         const errors = result.error.errors.map((e) => e.message);
+        log(errors, "ERRORS");
         return c.json({ success: result.success, message: errors[0] }, 400);
       }
     }),
@@ -65,9 +67,20 @@ const signupRoute = new Hono<Context>()
         return c.json({ success: true, redirect: "/" });
       } catch (error) {
         const message = getErrorMessage(error);
+        log(message, "ERROR");
         return c.json({ success: false, message }, 500);
       }
     }
-  );
+  )
+  .post("/check/email", async (c) => {
+    const { email } = await c.req.json();
+
+    const res = await db.query.users.findFirst({
+      columns: { email: true },
+      where: eq(users.email, email),
+    });
+
+    return c.json({ available: res === undefined }, 200);
+  });
 
 export default signupRoute;

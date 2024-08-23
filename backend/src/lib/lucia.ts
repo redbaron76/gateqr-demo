@@ -8,6 +8,8 @@ export const adapter = new DrizzleSQLiteAdapter(db, sessions, users);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
+    name: "gateqr-session-cookie",
+    expires: false,
     attributes: {
       // set to `true` when using HTTPS
       secure: process.env.NODE_ENV === "production",

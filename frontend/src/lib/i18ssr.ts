@@ -34,7 +34,7 @@ class i18SSR {
     // load locales
     this.loadLocales().then(() => {
       // then set the current locale
-      this.setLocale(this.currentLocale, "constructor");
+      this.setLocale(this.currentLocale);
     });
   }
 

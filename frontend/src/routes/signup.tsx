@@ -6,9 +6,9 @@ import { Label } from "@/components/ui/label";
 import { api } from "@/lib/client";
 import { createFileRoute } from "@tanstack/react-router";
 import { log } from "@/lib/utils";
+import { signupSchema } from "../../../backend/src/validators/signup";
 import { useForm } from "@tanstack/react-form";
 import useTranslate from "@/hooks/useTranslate";
-import { z } from "zod";
 import { zodValidator } from "@tanstack/zod-form-adapter";
 
 export const Route = createFileRoute("/signup")({
@@ -22,7 +22,6 @@ type FieldMetaType = {
 
 const FieldInfo: React.FC<FieldMetaType> = ({ meta, min }) => {
   const { t } = useTranslate();
-
   return meta.isTouched && meta.errors.length ? (
     <div className="text-red-500 text-xs p-1">
       {meta.isValidating
@@ -40,6 +39,7 @@ function Signup() {
       email: "",
       password: "",
     },
+    validatorAdapter: zodValidator(),
     onSubmit: async ({ value: { email, password } }) => {
       const response = await api.signup.$post({
         json: {
@@ -48,9 +48,10 @@ function Signup() {
         },
       });
 
-      log(response, "RESPONSE");
+      const data = await response.json();
+
+      log(data, "DATA");
     },
-    validatorAdapter: zodValidator(),
   });
 
   return (
@@ -69,7 +70,16 @@ function Signup() {
             <form.Field
               name="email"
               validators={{
-                onChange: z.string().email({ message: "email" }),
+                onChange: signupSchema.shape.email,
+                onSubmitAsync: async ({ value: email }) => {
+                  const res = await api.signup.check.email.$post({
+                    json: {
+                      email,
+                    },
+                  });
+                  const { available } = await res.json();
+                  return available ? undefined : "emailAlreadyExists";
+                },
               }}
               children={(field) => (
                 <div className="flex flex-col gap-2">
@@ -91,9 +101,7 @@ function Signup() {
             <form.Field
               name="password"
               validators={{
-                onChange: z.string().min(8, {
-                  message: t("password", 8),
-                }),
+                onChange: signupSchema.shape.password,
               }}
               children={(field) => (
                 <div className="flex flex-col gap-2">
